@@ -256,6 +256,11 @@
 #define SENSOR_LUXES					78
 #define SENSOR_ULTRASOUND				79
 
+// Custom: UiO
+#define SENSOR_SDI12_CTD10 200
+#define SENSOR_SDI12_DS2_1 201
+#define SENSOR_SDI12_DS2_2 202
+
 
 
 
@@ -500,6 +505,22 @@ const char	str_frame_187[]  PROGMEM = "CB_FL";
 const char	str_frame_188[]  PROGMEM = "CB_TP"; 
 const char	str_frame_189[]  PROGMEM = "CB_FP"; 
 
+// Reserved
+const char	str_frame_190[]	PROGMEM = "";
+const char	str_frame_191[]	PROGMEM = "";
+const char	str_frame_192[]	PROGMEM = "";
+const char	str_frame_193[]	PROGMEM = "";
+const char	str_frame_194[]	PROGMEM = "";
+const char	str_frame_195[]	PROGMEM = "";
+const char	str_frame_196[]	PROGMEM = "";
+const char	str_frame_197[]	PROGMEM = "";
+const char	str_frame_198[]	PROGMEM = "";
+const char	str_frame_199[]	PROGMEM = "";
+
+// Custom: UiO
+const char	str_frame_200[]	PROGMEM = "SDI12_CTD10";
+const char	str_frame_201[]	PROGMEM = "SDI12_DS2_1";
+const char	str_frame_202[]	PROGMEM = "SDI12_DS2_2";
 
 
 /******************************************************************************* 
@@ -701,6 +722,23 @@ const char* const FRAME_SENSOR_TABLE[] PROGMEM=
 	str_frame_187,
 	str_frame_188,
 	str_frame_189,
+
+	// Reserved
+	str_frame_190,
+	str_frame_191,
+	str_frame_192,
+	str_frame_193,
+	str_frame_194,
+	str_frame_195,
+	str_frame_196,
+	str_frame_197,
+	str_frame_198,
+	str_frame_199,
+
+	// Custom: UiO
+	str_frame_200,
+	str_frame_201,
+	str_frame_202,
 	
 };
 	
@@ -942,6 +980,23 @@ const uint8_t FRAME_SENSOR_TYPE_TABLE[] PROGMEM=
 	0,		// 187
 	0,		// 188
 	1,		// 189
+
+	// Reserved
+	0,		// 190
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,		// 199
+
+	// Custom: UiO SDI-12
+	2, // CTD-10	// 200
+	2, // DS-2
+	2, // DS-2
 	
 };
 
@@ -1179,6 +1234,23 @@ const uint8_t FRAME_SENSOR_FIELD_TABLE[] PROGMEM=
 	1,		// 187
 	1,		// 188
 	1,		// 189	
+
+	// Reserved
+	1,		// 190
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,		// 199
+
+	// Custom: UiO SDI-12
+	3, // CTD-10	// 200
+	3, // DS-2
+	3, // DS-2
 	
 };
 	
@@ -1412,6 +1484,23 @@ const uint8_t FRAME_DECIMAL_TABLE[] PROGMEM =
 	0,		// 187
 	0,		// 188
 	0,		// 189
+
+	// Reserved
+	0,		// 190
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,		// 199
+
+	// Custom: UiO SDI-12
+	3, // CTD-10	// 200
+	3, // DS-2
+	3, // DS-2
 	
 };
 	

@@ -783,10 +783,10 @@
 #define SENSOR_ORP_B		170
 #define SENSOR_ORP_C		171
 
-// UiO: SDI-12
-#define SENSOR_SDI12_CTD10 172
-#define SENSOR_SDI12_DS2_1 173
-#define SENSOR_SDI12_DS2_2 174
+// Custom: UiO
+#define SENSOR_SDI12_CTD10 200
+#define SENSOR_SDI12_DS2_1 201
+#define SENSOR_SDI12_DS2_2 202
 
 
 
@@ -1032,10 +1032,40 @@ const char	str_ORP_A[]		PROGMEM = "ORP_A";	//	169
 const char	str_ORP_B[]		PROGMEM = "ORP_B";	//	170
 const char	str_ORP_C[]		PROGMEM = "ORP_C";	//	171
 
-// UiO: SDI-12
-const char	str_SDI12_CTD10[]	PROGMEM = "SDI12_CTD10";	// 172
-const char	str_SDI12_DS2_1[]	PROGMEM = "SDI12_DS2_1";	// 173
-const char	str_SDI12_DS2_2[]	PROGMEM = "SDI12_DS2_2";	// 174
+// Reserved
+const char	str_172[]	PROGMEM = "";
+const char	str_173[]	PROGMEM = "";
+const char	str_174[]	PROGMEM = "";
+const char	str_175[]	PROGMEM = "";
+const char	str_176[]	PROGMEM = "";
+const char	str_177[]	PROGMEM = "";
+const char	str_178[]	PROGMEM = "";
+const char	str_179[]	PROGMEM = "";
+const char	str_180[]	PROGMEM = "";
+const char	str_181[]	PROGMEM = "";
+const char	str_182[]	PROGMEM = "";
+const char	str_183[]	PROGMEM = "";
+const char	str_184[]	PROGMEM = "";
+const char	str_185[]	PROGMEM = "";
+const char	str_186[]	PROGMEM = "";
+const char	str_187[]	PROGMEM = "";
+const char	str_188[]	PROGMEM = "";
+const char	str_189[]	PROGMEM = "";
+const char	str_190[]	PROGMEM = "";
+const char	str_191[]	PROGMEM = "";
+const char	str_192[]	PROGMEM = "";
+const char	str_193[]	PROGMEM = "";
+const char	str_194[]	PROGMEM = "";
+const char	str_195[]	PROGMEM = "";
+const char	str_196[]	PROGMEM = "";
+const char	str_197[]	PROGMEM = "";
+const char	str_198[]	PROGMEM = "";
+const char	str_199[]	PROGMEM = "";
+
+// Custom: UiO
+const char	str_200[]	PROGMEM = "SDI12_CTD10";
+const char	str_201[]	PROGMEM = "SDI12_DS2_1";
+const char	str_202[]	PROGMEM = "SDI12_DS2_2";
 
 /******************************************************************************* 
  * SENSOR_TABLE - Sensor label table
@@ -1274,10 +1304,40 @@ const char* const SENSOR_TABLE[] PROGMEM=
 	str_ORP_B,	//	170
 	str_ORP_C,	//	171
 
-	// UiO: SDI-12
-	str_SDI12_CTD10,	// 172
-	str_SDI12_DS2_1,	// 173
-	str_SDI12_DS2_2,	// 174
+	// Reserved
+	str_172,
+	str_173,
+	str_174,
+	str_175,
+	str_176,
+	str_177,
+	str_178,
+	str_179,
+	str_180,
+	str_181,
+	str_182,
+	str_183,
+	str_184,
+	str_185,
+	str_186,
+	str_187,
+	str_188,
+	str_189,
+	str_190,
+	str_191,
+	str_192,
+	str_193,
+	str_194,
+	str_195,
+	str_196,
+	str_197,
+	str_198,
+	str_199,
+
+	// Custom: UiO
+	str_200,
+	str_201,
+	str_202,
 
 };
 
@@ -1529,10 +1589,40 @@ const uint8_t SENSOR_TYPE_TABLE[] PROGMEM=
 	2, // str_ORP_B,	// 170
 	2, // str_ORP_C,	// 171
 
-	// UiO: SDI-12
-	2, // str_SDI12_CTD10	// 172
-	2, // str_SDI12_DS2_1	// 173
-	2, // str_SDI12_DS2_2	// 174
+	// Reserved
+	0,		// 172
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,		// 199
+
+	// Custom: UiO SDI-12
+	2, // CTD-10	// 200
+	2, // DS-2
+	2, // DS-2
 	
 };
 
@@ -1778,10 +1868,40 @@ const uint8_t SENSOR_FIELD_TABLE[] PROGMEM=
 	1, // str_ORP_B,	// 170
 	1, // str_ORP_C,	// 171
 
-	// UiO: SDI-12
-	3, // str_SDI12_CTD10	// 172
-	3, // str_SDI12_DS2_1	// 173
-	3, // str_SDI12_DS2_2	// 174
+	// Reserved
+	1,			// 172
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,
+	1,			// 199
+
+	// Custom: UiO SDI-12
+	3, // CTD-10	// 200
+	3, // DS-2
+	3, // DS-2
 };
 
 
@@ -2024,10 +2144,40 @@ const uint8_t DECIMAL_TABLE[] PROGMEM =
 	3, // str_ORP_B,	// 170
 	3, // str_ORP_C,	// 171
 
-	// UiO: SDI-12
-	2, // str_SDI12_CTD10	// 172
-	2, // str_SDI12_DS2_1	// 173
-	2, // str_SDI12_DS2_2	// 174
+	// Reserved
+	0,			// 172
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,			// 199
+
+	// Custom: UiO SDI-12
+	2, // CTD-10	// 200
+	2, // DS-2
+	2, // DS-2
 };
 
 #endif
