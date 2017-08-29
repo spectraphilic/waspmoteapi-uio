@@ -1063,9 +1063,9 @@ const char	str_198[]	PROGMEM = "";
 const char	str_199[]	PROGMEM = "";
 
 // Custom: UiO
-const char	str_200[]	PROGMEM = "SDI12_CTD10";
-const char	str_201[]	PROGMEM = "SDI12_DS2_1";
-const char	str_202[]	PROGMEM = "SDI12_DS2_2";
+const char	str_200[]	PROGMEM = "CTD10";
+const char	str_201[]	PROGMEM = "DS2_1";
+const char	str_202[]	PROGMEM = "DS2_2";
 
 /******************************************************************************* 
  * SENSOR_TABLE - Sensor label table
