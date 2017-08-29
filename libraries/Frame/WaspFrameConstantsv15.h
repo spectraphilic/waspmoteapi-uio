@@ -518,9 +518,9 @@ const char	str_frame_198[]	PROGMEM = "";
 const char	str_frame_199[]	PROGMEM = "";
 
 // Custom: UiO
-const char	str_frame_200[]	PROGMEM = "SDI12_CTD10";
-const char	str_frame_201[]	PROGMEM = "SDI12_DS2_1";
-const char	str_frame_202[]	PROGMEM = "SDI12_DS2_2";
+const char	str_frame_200[]	PROGMEM = "CTD10";
+const char	str_frame_201[]	PROGMEM = "DS2_1";
+const char	str_frame_202[]	PROGMEM = "DS2_2";
 
 
 /******************************************************************************* 
@@ -1498,9 +1498,9 @@ const uint8_t FRAME_DECIMAL_TABLE[] PROGMEM =
 	0,		// 199
 
 	// Custom: UiO SDI-12
-	3, // CTD-10	// 200
-	3, // DS-2
-	3, // DS-2
+	2, // CTD-10	// 200
+	2, // DS-2
+	2, // DS-2
 	
 };
 	
