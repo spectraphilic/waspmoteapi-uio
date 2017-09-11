@@ -260,6 +260,7 @@
 #define SENSOR_SDI12_CTD10 200
 #define SENSOR_SDI12_DS2_1 201
 #define SENSOR_SDI12_DS2_2 202
+#define SENSOR_DS1820 203
 
 
 
@@ -521,6 +522,7 @@ const char	str_frame_199[]	PROGMEM = "";
 const char	str_frame_200[]	PROGMEM = "CTD10";
 const char	str_frame_201[]	PROGMEM = "DS2_1";
 const char	str_frame_202[]	PROGMEM = "DS2_2";
+const char	str_frame_203[]	PROGMEM = "DS1820";
 
 
 /******************************************************************************* 
@@ -739,6 +741,7 @@ const char* const FRAME_SENSOR_TABLE[] PROGMEM=
 	str_frame_200,
 	str_frame_201,
 	str_frame_202,
+	str_frame_203,
 	
 };
 	
@@ -997,6 +1000,7 @@ const uint8_t FRAME_SENSOR_TYPE_TABLE[] PROGMEM=
 	2, // CTD-10	// 200
 	2, // DS-2
 	2, // DS-2
+	2, // DS1820
 	
 };
 
@@ -1251,6 +1255,7 @@ const uint8_t FRAME_SENSOR_FIELD_TABLE[] PROGMEM=
 	3, // CTD-10	// 200
 	3, // DS-2
 	3, // DS-2
+	1, // DS1820
 	
 };
 	
@@ -1501,6 +1506,7 @@ const uint8_t FRAME_DECIMAL_TABLE[] PROGMEM =
 	2, // CTD-10	// 200
 	2, // DS-2
 	2, // DS-2
+	2, // DS1820
 	
 };
 	
