@@ -787,6 +787,7 @@
 #define SENSOR_SDI12_CTD10 200
 #define SENSOR_SDI12_DS2_1 201
 #define SENSOR_SDI12_DS2_2 202
+#define SENSOR_DS1820 203
 
 
 
@@ -1066,6 +1067,7 @@ const char	str_199[]	PROGMEM = "";
 const char	str_200[]	PROGMEM = "CTD10";
 const char	str_201[]	PROGMEM = "DS2_1";
 const char	str_202[]	PROGMEM = "DS2_2";
+const char	str_203[]	PROGMEM = "DS1820";
 
 /******************************************************************************* 
  * SENSOR_TABLE - Sensor label table
@@ -1338,6 +1340,7 @@ const char* const SENSOR_TABLE[] PROGMEM=
 	str_200,
 	str_201,
 	str_202,
+	str_203,
 
 };
 
@@ -1623,6 +1626,7 @@ const uint8_t SENSOR_TYPE_TABLE[] PROGMEM=
 	2, // CTD-10	// 200
 	2, // DS-2
 	2, // DS-2
+	2, // DS1820
 	
 };
 
@@ -1902,6 +1906,7 @@ const uint8_t SENSOR_FIELD_TABLE[] PROGMEM=
 	3, // CTD-10	// 200
 	3, // DS-2
 	3, // DS-2
+	1, // DS1820
 };
 
 
@@ -2178,6 +2183,7 @@ const uint8_t DECIMAL_TABLE[] PROGMEM =
 	2, // CTD-10	// 200
 	2, // DS-2
 	2, // DS-2
+	2, // DS1820
 };
 
 #endif
