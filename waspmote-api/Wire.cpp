@@ -380,10 +380,13 @@ void TwoWire::secureBegin()
 			#endif		
 			// It is necessary to switch on the power supply if the Sensor Board is 
 			// connected to Waspmote so as not to cause intereferences in the I2C bus
-			if (((WaspRegisterSensor & REG_EVENTS)||(WaspRegisterSensor & REG_AMBIENT)) && !_3V3_ON)
+			if ((WaspRegisterSensor & REG_EVENTS)||(WaspRegisterSensor & REG_AMBIENT))
 			{
-				PWR.setSensorPower(SENS_3V3, SENS_ON);		
-				delay(50);		
+				if (!_3V3_ON)
+				{
+					PWR.setSensorPower(SENS_3V3, SENS_ON);
+					delay(50);
+				}
 			}
 			else if (!_5V_ON || !_3V3_ON)
 			{
