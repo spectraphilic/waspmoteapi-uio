@@ -364,7 +364,12 @@ void onHAIwakeUP(void)
 	
 	// Enable interrupts by setting the global interrupt mask
 	sei();
+
+	onHAIwakeUP_after();
 }
+
+
+void onHAIwakeUP_after(void) { }
 
 /* onLAIwakeUP(void) - setup the default interrupt for the Low Activate Interrupts
  * 
