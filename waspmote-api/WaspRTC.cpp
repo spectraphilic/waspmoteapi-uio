@@ -2162,14 +2162,14 @@ void WaspRTC::detachInt(void)
  */
 void WaspRTC::setWatchdog(uint16_t minutesWatchdog)
 {		
-	if (_boot_version < 'H')
-	{
-		PRINT_RTC(F("\n***************  WARNING *******************\n"));
-		PRINT_RTC(F("This example is valid only for Waspmote v15.\n"));
-		PRINT_RTC(F("Your Waspmote version is v12.\n"));
-		PRINT_RTC(F("*******************************************\n"));
-		return (void)0;
-	}
+//	if (_boot_version < 'H')
+//	{
+//		PRINT_RTC(F("\n***************  WARNING *******************\n"));
+//		PRINT_RTC(F("This example is valid only for Waspmote v15.\n"));
+//		PRINT_RTC(F("Your Waspmote version is v12.\n"));
+//		PRINT_RTC(F("*******************************************\n"));
+//		return (void)0;
+//	}
 	
 	uint8_t days = 0;
 	uint8_t hours = 0;
