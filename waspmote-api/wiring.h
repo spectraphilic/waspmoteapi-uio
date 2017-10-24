@@ -126,6 +126,8 @@ void onHAIwakeUP(void);
 void onLAIwakeUP(void);
 void clearIntFlag();
 
+extern void onHAIwakeUP_after(void) __attribute__((weak));
+
 //////////////////////
 
 void wakeUpNowDefault(void);
