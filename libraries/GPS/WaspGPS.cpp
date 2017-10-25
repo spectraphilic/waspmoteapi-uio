@@ -284,7 +284,6 @@ uint8_t WaspGPS::init(const char* _coordinateLat,
 		USB.println(F("init command not found."));
 		#endif
 		OFF();
-		ON();
 	}
 	
 	return valid;
