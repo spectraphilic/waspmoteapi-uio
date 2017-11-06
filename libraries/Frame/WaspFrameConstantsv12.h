@@ -789,6 +789,7 @@
 #define SENSOR_SDI12_DS2_2 202
 #define SENSOR_DS1820 203
 #define SENSOR_MB73XX 204
+#define SENSOR_GPS_STATS 205 // Time waiting for signal, and time skew
 
 
 
@@ -1070,6 +1071,7 @@ const char	str_201[]	PROGMEM = "DS2_1";
 const char	str_202[]	PROGMEM = "DS2_2";
 const char	str_203[]	PROGMEM = "DS1820";
 const char	str_204[]	PROGMEM = "MB73XX";
+const char	str_205[]	PROGMEM = "GPS_STATS";
 
 /******************************************************************************* 
  * SENSOR_TABLE - Sensor label table
@@ -1344,6 +1346,7 @@ const char* const SENSOR_TABLE[] PROGMEM=
 	str_202,
 	str_203,
 	str_204,
+	str_205,
 
 };
 
@@ -1631,6 +1634,7 @@ const uint8_t SENSOR_TYPE_TABLE[] PROGMEM=
 	2, // DS-2
 	2, // DS1820
 	4, // MB73XX
+	4, // GPS_STATS
 	
 };
 
@@ -1912,6 +1916,7 @@ const uint8_t SENSOR_FIELD_TABLE[] PROGMEM=
 	3, // DS-2
 	1, // DS1820
 	1, // MB73XX
+	2, // GPS_STATS
 };
 
 
@@ -2190,6 +2195,7 @@ const uint8_t DECIMAL_TABLE[] PROGMEM =
 	2, // DS-2
 	2, // DS1820
 	0, // MB73XX
+	0, // GPS_STATS
 };
 
 #endif
