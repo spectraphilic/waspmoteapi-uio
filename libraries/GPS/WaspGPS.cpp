@@ -2457,9 +2457,13 @@ int8_t WaspGPS::saveEphems(const char* filename)
 	uint8_t endFile[7] ={0xAA,0xBB,0xCC,0xCC,0xBB,0xAA,0xAA};
 
 	// First of all, prepare SD card.
-	SD.ON();
+	bool _SD_ON = (WaspRegister & REG_SD);
+	if (! _SD_ON)
+	{
+		SD.ON();
+	}
 
-	// check if the card is there or not
+        // check if the card is there or not
 	if (!SD.isSD())
 	{
 		#ifdef DEBUG_MODE
@@ -2588,7 +2592,10 @@ int8_t WaspGPS::saveEphems(const char* filename)
 	SD.append(filename, endFile, 7);
 
 	// Turn OFF SD card
-	SD.OFF();
+	if (! _SD_ON)
+	{
+		SD.OFF();
+	}
 
 	// Now change to NMEA mode
 	setCommMode(NMEA_MODE);
