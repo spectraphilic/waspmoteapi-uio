@@ -1264,7 +1264,7 @@ const uint8_t FRAME_SENSOR_FIELD_TABLE[] PROGMEM=
 	3, // DS-2
 	3, // DS-2
 	1, // DS1820
-	1, // MB73XX
+	2, // MB73XX
 	2, // GPS_STATS
 	
 };
