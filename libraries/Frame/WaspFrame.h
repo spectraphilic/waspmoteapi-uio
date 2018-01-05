@@ -292,6 +292,7 @@ public:
      * EEPROM memory.
      */ 
     void createFrame(uint8_t mode);   
+    void createFrameBin(uint8_t mode);   
   
     //! Function : creates a new frame
     /*! This function creates a new frame.
@@ -356,6 +357,20 @@ public:
     int8_t addSensor(uint8_t type, uint8_t val1, uint8_t val2, uint8_t val3, int val4);
     int8_t addSensor(uint8_t type, int val1,int val2,int val3);
     int8_t addSensor(uint8_t type, double val1,double val2,double val3);
+
+    int8_t addSensorBin(uint8_t type, int value);
+    int8_t addSensorBin(uint8_t type, uint16_t value);
+    int8_t addSensorBin(uint8_t type, unsigned long value);
+    int8_t addSensorBin(uint8_t type, double value);
+    int8_t addSensorBin(uint8_t type, double value, int N);
+    int8_t addSensorBin(uint8_t type, char* str);
+
+    int8_t addSensorBin(uint8_t type, double val1, double val2);
+    int8_t addSensorBin(uint8_t type, unsigned long val1, unsigned long val2);
+    int8_t addSensorBin(uint8_t type, uint8_t val1, uint8_t val2, uint8_t val3);
+    int8_t addSensorBin(uint8_t type, uint8_t val1, uint8_t val2, uint8_t val3, int val4);
+    int8_t addSensorBin(uint8_t type, int val1,int val2,int val3);
+    int8_t addSensorBin(uint8_t type, double val1,double val2,double val3);
 
     int8_t checkFields(uint8_t type, uint8_t typeVal, uint8_t fields);
 
