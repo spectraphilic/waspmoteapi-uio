@@ -548,6 +548,34 @@ void WaspFrame::createFrame(uint8_t mode)
 	}
 	else if (_mode == BINARY)
 	{
+		createFrameBin(mode);
+	}
+}
+
+
+void WaspFrame::createFrameBin(uint8_t mode)
+{	
+	// local variables
+	uint8_t sequence;	
+	char str[17];
+	
+	// store mode: ASCII or BINARY
+	_mode = mode;	
+	
+	// init buffer
+	memset( buffer, 0x00, sizeof(buffer) );
+	memset( field, 0x00, sizeof(field) );
+	
+	// init counter
+	numFields = 0;	
+	
+	// set frame delimiter
+	buffer[0] = '<';
+	buffer[1] = '=';
+	buffer[2] = '>';
+		
+	uint8_t type;
+
 		/** BINARY FRAME **/
 		if (_boot_version >= 'G')
 		{
@@ -636,8 +664,6 @@ void WaspFrame::createFrame(uint8_t mode)
 
 		sequence++;
 		storeSequence(sequence);
-
-	}
 }
 
 /* 
@@ -1236,6 +1262,14 @@ int8_t WaspFrame::addSensor(uint8_t type, int value)
 	}
 	else
 	{
+		return addSensorBin(type, value);
+	}
+
+	return length;
+}
+
+int8_t WaspFrame::addSensorBin(uint8_t type, int value)
+{
 		// check if the data input type corresponds to the sensor
 		if (value<=255)
 		{
@@ -1315,11 +1349,8 @@ int8_t WaspFrame::addSensor(uint8_t type, int value)
 		// update number of bytes field
 		buffer[4] = frame.length-5;
 
-	}
-
 	return length;
 }
-
 
 
 /*
@@ -1396,6 +1427,15 @@ int8_t WaspFrame::addSensor(uint8_t type, uint16_t value)
 	}
 	else
 	{
+		return addSensorBin(type, value);
+	}
+
+	return length;
+}
+
+
+int8_t WaspFrame::addSensorBin(uint8_t type, uint16_t value)
+{
 		// check if the data input type corresponds to the sensor
 		if (value<=255)
 		{
@@ -1475,11 +1515,8 @@ int8_t WaspFrame::addSensor(uint8_t type, uint16_t value)
 		// update number of bytes field
 		buffer[4] = frame.length-5;
 
-	}
-
 	return length;
 }
-
 
 
 
@@ -1558,6 +1595,15 @@ int8_t WaspFrame::addSensor(uint8_t type, unsigned long value)
 	}
 	else
 	{
+		return addSensorBin(type, value);
+	}
+
+	return length;
+}
+
+
+int8_t WaspFrame::addSensorBin(uint8_t type, unsigned long value)
+{
 		// check if the data input type corresponds to the sensor		
 		if(checkFields(type, TYPE_ULONG, 1) == -1 ) return -1;
 		
@@ -1604,13 +1650,9 @@ int8_t WaspFrame::addSensor(uint8_t type, unsigned long value)
 		numFields++;
 		// update number of bytes field
 		buffer[4] = frame.length-5;
-		
-	}
 
 	return length;
 }
-
-
 
 
 /*
@@ -1640,6 +1682,24 @@ int8_t WaspFrame::addSensor(uint8_t type, double value)
 	}	
 	
 	return addSensor(type, value, numDecimals);
+}
+
+
+int8_t WaspFrame::addSensorBin(uint8_t type, double value)
+{
+	// get name of sensor from table
+	char numDecimals;
+		
+	if (_boot_version >= 'G')
+	{
+		numDecimals = (uint8_t)pgm_read_word(&(FRAME_DECIMAL_TABLE[type])); 
+	}
+	else
+	{
+		numDecimals = (uint8_t)pgm_read_word(&(DECIMAL_TABLE[type])); 
+	}	
+	
+	return addSensorBin(type, value, numDecimals);
 }
 
 
@@ -1719,6 +1779,14 @@ int8_t WaspFrame::addSensor(uint8_t type, double value, int N)
 	}
 	else
 	{	
+		return addSensorBin(type, value, N);
+	}		
+
+	return length;
+}
+
+int8_t WaspFrame::addSensorBin(uint8_t type, double value, int N)
+{
 		// check if the data input type corresponds to the sensor	
 		if(checkFields(type, TYPE_FLOAT, 1) == -1 ) return -1;
 		
@@ -1766,10 +1834,9 @@ int8_t WaspFrame::addSensor(uint8_t type, double value, int N)
 		// update number of bytes field
 		buffer[4] = frame.length-5;
 
-	}		
-
 	return length;
 }
+
 
 
 
@@ -1873,6 +1940,45 @@ int8_t WaspFrame::addSensor(uint8_t type, char* str)
 	}
 	else
 	{
+		return addSensorBin(type, str);
+	}		
+
+	return length;
+}
+
+
+int8_t WaspFrame::addSensorBin(uint8_t type, char* str)
+{	
+	// calculate the buffer length to be created 
+	// depending on the input string to be copied to it
+	uint16_t string_length = strlen(str)+1;
+	const  uint16_t MAX_SIZE = 400;
+	
+	// limit the max string length to MAX_SIZE Bytes 
+	// to avoid running out of memory
+	if (string_length >= MAX_SIZE)
+	{
+		string_length = MAX_SIZE;
+	}	
+	
+	// create aux buffer
+	char aux_str[string_length];
+	
+	// clear aux buffer	
+	memset( aux_str, 0x00, sizeof(aux_str) );
+	
+	// copy string to aux buffer
+	strncpy( aux_str, str, sizeof(aux_str)-1 );
+	
+	// avoid '#' characters inside the string
+	for( uint16_t i = 0; i < strlen(aux_str) ; i++)
+	{
+		if( aux_str[i] == '#' )
+		{			
+			aux_str[i] = '_';
+		}
+	}	
+	
 		// check if the data input type corresponds to the sensor	
 		if(checkFields(type, TYPE_CHAR, 1) == -1 ) return -1;
 
@@ -1907,13 +2013,9 @@ int8_t WaspFrame::addSensor(uint8_t type, char* str)
 		numFields++;
 		// update number of bytes field
 		buffer[4] = frame.length-5;
-		
-	}		
 
 	return length;
 }
-
-
 
 
 /*
@@ -2019,6 +2121,16 @@ int8_t WaspFrame::addSensor(uint8_t type, double val1, double val2)
 	}
 	else
 	{
+		return addSensorBin(type, val1, val2);
+	}		
+
+	return length;
+}
+
+
+int8_t WaspFrame::addSensorBin(uint8_t type, double val1, double val2)
+{
+
 		// check if the data input type corresponds to the sensor	
 		if(checkFields(type, TYPE_FLOAT, 2) == -1 ) return -1;
 		
@@ -2071,8 +2183,6 @@ int8_t WaspFrame::addSensor(uint8_t type, double val1, double val2)
 		numFields++;
 		// update number of bytes field
 		buffer[4] = frame.length-5;
-
-	}		
 
 	return length;
 }
@@ -2169,6 +2279,15 @@ int8_t WaspFrame::addSensor(uint8_t type, unsigned long val1, unsigned long val2
 	}
 	else
 	{
+		return addSensorBin(type, val1, val2);
+	}		
+
+	return length;
+}
+
+
+int8_t WaspFrame::addSensorBin(uint8_t type, unsigned long val1, unsigned long val2)
+{
 		// check if the data input type corresponds to the sensor	
 		if(checkFields(type, TYPE_ULONG, 2) == -1 ) return -1;
 		
@@ -2209,11 +2328,8 @@ int8_t WaspFrame::addSensor(uint8_t type, unsigned long val1, unsigned long val2
 		// update number of bytes field
 		buffer[4] = frame.length-5;
 
-	}		
-
 	return length;
 }
-
 
 
 
@@ -2326,6 +2442,15 @@ int8_t WaspFrame::addSensor(uint8_t type, uint8_t val1, uint8_t val2, uint8_t va
 	}
 	else
 	{
+		return addSensorBin(type, val1, val2, val3);
+	}
+
+	return length;
+}
+
+
+int8_t WaspFrame::addSensorBin(uint8_t type, uint8_t val1, uint8_t val2, uint8_t val3)
+{
 		/// BINARY
 				
 		// check if the data input type corresponds to the sensor	
@@ -2358,12 +2483,8 @@ int8_t WaspFrame::addSensor(uint8_t type, uint8_t val1, uint8_t val2, uint8_t va
 		// update number of bytes field
 		buffer[4] = frame.length-5;
 
-	}
-
 	return length;
 }
-
-
 
 
 
@@ -2501,6 +2622,15 @@ int8_t WaspFrame::addSensor(uint8_t type, uint8_t val1, uint8_t val2, uint8_t va
 	}
 	else
 	{
+		return addSensorBin(type, val1, val2, val3, val4);
+	}
+
+	return length;
+}
+
+
+int8_t WaspFrame::addSensorBin(uint8_t type, uint8_t val1, uint8_t val2, uint8_t val3, int val4)
+{
 		/// BINARY
 		
 		// As SENSOR_TIME is thought to be a 3-value field. This function permits to 
@@ -2535,12 +2665,8 @@ int8_t WaspFrame::addSensor(uint8_t type, uint8_t val1, uint8_t val2, uint8_t va
 		// update number of bytes field
 		buffer[4] = frame.length-5;
 
-	}
-
 	return length;
 }
-
-
 
 
 
@@ -2649,6 +2775,15 @@ int8_t WaspFrame::addSensor(uint8_t type, int val1,int val2,int val3)
 	}
 	else
 	{
+		return addSensorBin(type, val1, val2, val3);
+	}
+
+	return length;
+}
+
+
+int8_t WaspFrame::addSensorBin(uint8_t type, int val1,int val2,int val3)
+{
 		// check if the data input type corresponds to the sensor	
 		if( checkFields(type, TYPE_INT, 3) == -1 ) return -1;
 
@@ -2689,8 +2824,6 @@ int8_t WaspFrame::addSensor(uint8_t type, int val1,int val2,int val3)
 		numFields++;
 		// update number of bytes field
 		buffer[4] = frame.length-5;
-
-	}
 
 	return length;
 }
@@ -2801,6 +2934,14 @@ int8_t WaspFrame::addSensor(uint8_t type, double val1,double val2,double val3)
 	}
 	else
 	{
+		return addSensorBin(type, val1, val2, val3);
+	}		
+
+	return length;
+}
+
+int8_t WaspFrame::addSensorBin(uint8_t type, double val1,double val2,double val3)
+{
 		// check if the data input type corresponds to the sensor	
 		if( checkFields(type, TYPE_FLOAT, 3) == -1 ) return -1;
 		
@@ -2856,8 +2997,6 @@ int8_t WaspFrame::addSensor(uint8_t type, double val1,double val2,double val3)
 		numFields++;
 		// update number of bytes field
 		buffer[4] = frame.length-5;
-
-	}		
 
 	return length;
 }
