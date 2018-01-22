@@ -1006,7 +1006,7 @@ const uint8_t FRAME_SENSOR_TYPE_TABLE[] PROGMEM=
 	2, // CTD-10	// 200
 	2, // DS-2
 	2, // DS-2
-	2, // DS1820
+	1, // DS1820
 	4, // MB73XX
 	4, // GPS_STATS
 	
