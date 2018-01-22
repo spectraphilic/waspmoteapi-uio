@@ -3002,6 +3002,64 @@ int8_t WaspFrame::addSensorBin(uint8_t type, double val1,double val2,double val3
 }
 
 
+/*
+ * addSensor( type, uint8_t n, const int* values) - add sensor to frame
+ *
+ * Parameters:
+ * 	type : Refers to the type of sensor data
+ * 	n : number of values to add (uint8_t)
+ * 	values : array of values to add (int16_t)
+ *
+ * Returns:
+ * 	'length' of the composed frame when ok
+ * 	-1 when the maximum length of the frame is reached
+ *
+ */
+int8_t WaspFrame::addSensorBin(uint8_t type, uint8_t n, const int* values)
+{
+	uint8_t size, start;
+	char val[2];
+
+	// check if the data input type corresponds to the sensor
+	if( checkFields(type, TYPE_INT, n) == -1 ) return -1;
+
+	// check if new sensor value fits
+	size = 1 + 1 + n*2;
+	if(!checkLength(size))
+	{
+		return -1;
+	}
+
+	// Header
+	start = length - size;
+	buffer[start] = (char)type; // type
+	buffer[start + 1] = (char)n; // number of values
+
+	// set data bytes (in this case, int is two bytes)
+	for (uint8_t i = 0; i < n; i ++)
+	{
+		memcpy(val, &(values[i]), 2);
+		buffer[start + 2 + 2*i] = val[0];
+		buffer[start + 2 + 2*i + 1] = val[1];
+	}
+	buffer[length] = '\0';
+
+	// add contents to struct
+	if (numFields < max_fields)
+	{
+		field[numFields].flag = false;
+		field[numFields].start = start;
+		field[numFields].size = size;
+	}
+
+	// increment sensor fields counter
+	numFields++;
+	// update number of bytes field
+	buffer[4] = frame.length-5;
+
+	return length;
+}
+
 
 /*
  * checkFields(type, typeVal, fields ) - check type of value given by the user
@@ -3077,7 +3135,7 @@ int8_t WaspFrame::checkFields(uint8_t type, uint8_t typeVal, uint8_t fields)
 	}	
 	
 	
-	if (nfields == fields)
+	if (nfields == fields || fields == 0)
 	{
 		//OK
 	}
