@@ -1022,6 +1022,9 @@ const uint8_t FRAME_SENSOR_TYPE_TABLE[] PROGMEM=
 * For example, a temperature sensor indicates the temperature in a single field. 
 * On the other hand, the GPS module indicates the position with two fields: 
 * latitude and longitude
+*
+* Zero means it's an array of values. The size of the array will be defined
+* within the frame, with a byte just after the frame type.
 ******************************************************************************/
 const uint8_t FRAME_SENSOR_FIELD_TABLE[] PROGMEM= 	  
 {   
@@ -1263,7 +1266,7 @@ const uint8_t FRAME_SENSOR_FIELD_TABLE[] PROGMEM=
 	3, // CTD-10	// 200
 	3, // DS-2
 	3, // DS-2
-	1, // DS1820
+	0, // DS1820
 	2, // MB73XX
 	2, // GPS_STATS
 	

@@ -379,6 +379,8 @@ public:
     int8_t addSensorBin(uint8_t type, int val1,int val2,int val3);
     int8_t addSensorBin(uint8_t type, double val1,double val2,double val3);
 
+    int8_t addSensorBin(uint8_t type, uint8_t n, const int* values);
+
     int8_t checkFields(uint8_t type, uint8_t typeVal, uint8_t fields);
 
     void setID(char* moteID);
