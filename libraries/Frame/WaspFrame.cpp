@@ -3135,7 +3135,7 @@ int8_t WaspFrame::checkFields(uint8_t type, uint8_t typeVal, uint8_t fields)
 	}	
 	
 	
-	if (nfields == fields || fields == 0)
+	if (nfields == fields || nfields == 0)
 	{
 		//OK
 	}
