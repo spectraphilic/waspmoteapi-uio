@@ -3017,31 +3017,44 @@ int8_t WaspFrame::addSensorBin(uint8_t type, double val1,double val2,double val3
  */
 int8_t WaspFrame::addSensorBin(uint8_t type, uint8_t n, const int* values)
 {
-	uint8_t size, start;
-	char val[2];
-
 	// check if the data input type corresponds to the sensor
 	if( checkFields(type, TYPE_INT, n) == -1 ) return -1;
 
-	// check if new sensor value fits
-	size = 1 + 1 + n*2;
-	if(!checkLength(size))
+	if (n == 0)
 	{
-		return -1;
+		return length;
 	}
 
 	// Header
-	start = length - size;
-	buffer[start] = (char)type; // type
-	buffer[start + 1] = (char)n; // number of values
+	uint8_t start = length;
+	if (!checkLength(1)) goto error; buffer[length-1] = (char)type;
+	if (!checkLength(1)) goto error; buffer[length-1] = (char)n;
 
-	// set data bytes (in this case, int is two bytes)
+	// Array of values
+	int32_t value; // Use 32 bits because the result may not fit in 16 bits
 	for (uint8_t i = 0; i < n; i ++)
 	{
-		memcpy(val, &(values[i]), 2);
-		buffer[start + 2 + 2*i] = val[0];
-		buffer[start + 2 + 2*i + 1] = val[1];
+		if (i > 0)
+		{
+			value = values[i] - values[i-1];
+			if (value > -128 && value < 128)
+			{
+				// little endian, so this copies the less significant byte
+				if (!checkLength(1)) goto error;
+				memcpy(&buffer[length-1], &value, 1);
+				continue;
+			}
+
+			// Use -128 as a marker to say next number is full 2
+			// bytes int. -128 is 1000000, as unsigned that's 128
+			if (!checkLength(1)) goto error;
+			buffer[length-1] = 128;
+		}
+
+		if (!checkLength(2)) goto error;
+		memcpy(&buffer[length-2], &values[i], 2);
 	}
+
 	buffer[length] = '\0';
 
 	// add contents to struct
@@ -3049,15 +3062,18 @@ int8_t WaspFrame::addSensorBin(uint8_t type, uint8_t n, const int* values)
 	{
 		field[numFields].flag = false;
 		field[numFields].start = start;
-		field[numFields].size = size;
+		field[numFields].size = length - start;
 	}
+	numFields++; // increment sensor fields counter
 
-	// increment sensor fields counter
-	numFields++;
 	// update number of bytes field
-	buffer[4] = frame.length-5;
+	buffer[4] = length - 5;
 
 	return length;
+
+error:
+	buffer[start] = '\0';
+	return -1;
 }
 
 
