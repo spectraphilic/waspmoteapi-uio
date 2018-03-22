@@ -790,6 +790,7 @@
 #define SENSOR_DS1820 203
 #define SENSOR_MB73XX 204
 #define SENSOR_GPS_STATS 205 // Time waiting for signal, and time skew
+#define SENSOR_VOLTS 206 // Battery voltage
 
 
 
@@ -1072,6 +1073,7 @@ const char	str_202[]	PROGMEM = "DS2_2";
 const char	str_203[]	PROGMEM = "DS1820";
 const char	str_204[]	PROGMEM = "MB73XX";
 const char	str_205[]	PROGMEM = "GPS_STATS";
+const char	str_206[]	PROGMEM = "VOLTS";
 
 /******************************************************************************* 
  * SENSOR_TABLE - Sensor label table
@@ -1347,6 +1349,7 @@ const char* const SENSOR_TABLE[] PROGMEM=
 	str_203,
 	str_204,
 	str_205,
+	str_206,
 
 };
 
@@ -1628,13 +1631,14 @@ const uint8_t SENSOR_TYPE_TABLE[] PROGMEM=
 	0,
 	0,		// 199
 
-	// Custom: UiO SDI-12
+	// Custom: UiO
 	2, // CTD-10	// 200
 	2, // DS-2
 	2, // DS-2
 	1, // DS1820
 	4, // MB73XX
 	4, // GPS_STATS
+	2, // VOLTS
 	
 };
 
@@ -1913,13 +1917,14 @@ const uint8_t SENSOR_FIELD_TABLE[] PROGMEM=
 	1,
 	1,			// 199
 
-	// Custom: UiO SDI-12
+	// Custom: UiO
 	3, // CTD-10	// 200
 	3, // DS-2
 	3, // DS-2
 	0, // DS1820
 	2, // MB73XX
 	2, // GPS_STATS
+	1, // VOLTS
 };
 
 
@@ -2192,13 +2197,14 @@ const uint8_t DECIMAL_TABLE[] PROGMEM =
 	0,
 	0,			// 199
 
-	// Custom: UiO SDI-12
+	// Custom: UiO
 	2, // CTD-10	// 200
 	2, // DS-2
 	2, // DS-2
 	2, // DS1820
 	0, // MB73XX
 	0, // GPS_STATS
+	2, // VOLTS
 };
 
 #endif
