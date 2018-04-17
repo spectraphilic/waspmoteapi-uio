@@ -1775,8 +1775,8 @@ WaspGPS::WaspGPS()
 	weekNo = (char*) "1711";
 	channel = (char*) "12";
 	resetCfg = (char*) "1";
-	coordinateLat = (char*) "41.680617";
-	coordinateLon = (char*) "-0.886233";
+	coordinateLat = (char*) "78.9245075"; //"41.680617";
+	coordinateLon = (char*) "11.9302955"; //"-0.886233";
 	coordinateAl = (char*) "222";
 
 }
