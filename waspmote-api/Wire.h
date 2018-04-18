@@ -133,8 +133,8 @@ class TwoWire
     void onRequest( void (*)(void) );
     void close();
     
-    void secureBegin();
-    void secureEnd();
+    void secureBegin() __attribute__((weak));
+    void secureEnd() __attribute__((weak));
 	
 	
 	//! This function writes a bit via I2C
