@@ -348,8 +348,8 @@ public:
 
     int8_t checkFields(uint8_t type, uint8_t typeVal, uint8_t fields);
 
-    void setID(char* moteID);
-    void getID(char* moteID);
+    void setID(char* moteID) __attribute__((weak));
+    void getID(char* moteID) __attribute__((weak));
    
     void decrementSequence(void);
     
