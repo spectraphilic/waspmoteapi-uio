@@ -127,68 +127,68 @@ uint32_t WaspUART::getDelay()
 /*
  * 
  * name: sendCommand
- * @param	char* command: command to be sent
- * @param	char* ans1: expected answer
+ * @param	const char* command: command to be sent
+ * @param	const char* ans1: expected answer
  * @param	bool flush: flush needed before sending command (1: flush; 0: not)
  * @return 	'0' if timeout error, 
  * 			'1' if ans1
  * 
  */
-uint8_t WaspUART::sendCommand(	char* command, 
-								char* ans1 )
+uint8_t WaspUART::sendCommand(	const char* command, 
+								const char* ans1 )
 {
 	return sendCommand(command, ans1, NULL, NULL, NULL, _def_timeout );	
 }
 
-uint8_t WaspUART::sendCommand(	char* command, 
-								char* ans1, 
+uint8_t WaspUART::sendCommand(	const char* command, 
+								const char* ans1, 
 								uint32_t timeout)
 {
 	return sendCommand(command, ans1, NULL, NULL, NULL, timeout );	
 }
 
 
-uint8_t WaspUART::sendCommand(	char* command, 
-								char* ans1, 
-								char* ans2 )
+uint8_t WaspUART::sendCommand(	const char* command, 
+								const char* ans1, 
+								const char* ans2 )
 {
 	return sendCommand(command, ans1, ans2, NULL, NULL, _def_timeout );	
 }
 		
 		
-uint8_t WaspUART::sendCommand(	char* command, 
-								char* ans1, 
-								char* ans2, 
+uint8_t WaspUART::sendCommand(	const char* command, 
+								const char* ans1, 
+								const char* ans2, 
 								uint32_t timeout)	
 {
 	return sendCommand(command, ans1, ans2, NULL, NULL, timeout );	
 }				
 	
 
-uint8_t WaspUART::sendCommand(	char* command, 
-								char* ans1, 
-								char* ans2, 
-								char* ans3 )
+uint8_t WaspUART::sendCommand(	const char* command, 
+								const char* ans1, 
+								const char* ans2, 
+								const char* ans3 )
 {
 	return sendCommand(command, ans1, ans2, ans3, NULL, _def_timeout );	
 }				
 						
 
-uint8_t WaspUART::sendCommand(	char* command, 
-								char* ans1, 
-								char* ans2,
-								char* ans3,  
+uint8_t WaspUART::sendCommand(	const char* command, 
+								const char* ans1, 
+								const char* ans2,
+								const char* ans3,  
 								uint32_t timeout)
 {
 	return sendCommand(command, ans1, ans2, ans3, NULL, timeout );	
 }				
 			
 	
-uint8_t WaspUART::sendCommand(	char* command, 
-								char* ans1, 
-								char* ans2, 
-								char* ans3, 
-								char* ans4)
+uint8_t WaspUART::sendCommand(	const char* command, 
+								const char* ans1, 
+								const char* ans2, 
+								const char* ans3, 
+								const char* ans4)
 {
 	return sendCommand(command, ans1, ans2, ans3, ans4, _def_timeout );	
 }		
@@ -197,11 +197,11 @@ uint8_t WaspUART::sendCommand(	char* command,
 /*
  * 
  * name: sendCommand
- * @param	char* command: command to be sent
- * @param	char* ans1: expected answer
- * @param	char* ans2: expected answer
- * @param	char* ans3: expected answer
- * @param	char* ans4: expected answer
+ * @param	const char* command: command to be sent
+ * @param	const char* ans1: expected answer
+ * @param	const char* ans2: expected answer
+ * @param	const char* ans3: expected answer
+ * @param	const char* ans4: expected answer
  * @param	uint32_t timeout: time to wait for response
  * @return 	'0' if timeout error, 
  * 			'1' if ans1
@@ -210,11 +210,11 @@ uint8_t WaspUART::sendCommand(	char* command,
  * 			'4' if ans4
  * 
  */
-uint8_t  WaspUART::sendCommand(	char* command, 
-								char* ans1, 
-								char* ans2, 
-								char* ans3, 
-								char* ans4, 
+uint8_t  WaspUART::sendCommand(	const char* command, 
+								const char* ans1, 
+								const char* ans2, 
+								const char* ans3, 
+								const char* ans4, 
 								uint32_t timeout)
 {
 	// index counter
@@ -338,12 +338,12 @@ uint8_t  WaspUART::sendCommand(	char* command,
  * name: find
  * @param	uint8_t* buffer: pointer to buffer to be scanned
  * @param	uint16_t length: actual length of buffer
- * @param	char* pattern: pattern to find
+ * @param	const char* pattern: pattern to find
  * @return 	'0' not found, 
  * 			'1' pattern found
  * 
  */
-bool WaspUART::find( uint8_t* buffer, uint16_t length, char* pattern)
+bool WaspUART::find( uint8_t* buffer, uint16_t length, const char* pattern)
 {
 	int result;
 	
@@ -402,73 +402,73 @@ void  WaspUART::sendCommand( uint8_t* command, uint16_t length )
  * name: waitFor
  * @brief	This function waits for one of the answers during a certain period 
  * 			of time. The result is stored in '_buffer'.
- * @param	char* ans1: expected answer
- * @param	char* ans2: expected answer
- * @param	char* ans3: expected answer
- * @param	char* ans4: expected answer
+ * @param	const char* ans1: expected answer
+ * @param	const char* ans2: expected answer
+ * @param	const char* ans3: expected answer
+ * @param	const char* ans4: expected answer
  * @return 	'0' if timeout error, 
  * 			'1' if ans1 is found
  * 			'2' if ans2 is found
  * 			'3' if ans3 is found
  * 			'4' if ans4 is found
  */
-uint8_t WaspUART::waitFor(	char* ans1 )
+uint8_t WaspUART::waitFor(	const char* ans1 )
 {
 	return waitFor( ans1, NULL, NULL, NULL, _def_timeout );	
 }
 
-uint8_t WaspUART::waitFor(	char* ans1, 
+uint8_t WaspUART::waitFor(	const char* ans1, 
 							uint32_t timeout)
 {
 	return waitFor( ans1, NULL, NULL, NULL, timeout );	
 }
 
 
-uint8_t WaspUART::waitFor(	char* ans1, 
-							char* ans2 )
+uint8_t WaspUART::waitFor(	const char* ans1, 
+							const char* ans2 )
 {
 	return waitFor( ans1, ans2, NULL, NULL, _def_timeout );	
 }
 		
 		
-uint8_t WaspUART::waitFor(	char* ans1, 
-							char* ans2, 
+uint8_t WaspUART::waitFor(	const char* ans1, 
+							const char* ans2, 
 							uint32_t timeout)	
 {
 	return waitFor( ans1, ans2, NULL, NULL, timeout );	
 }				
 	
 
-uint8_t WaspUART::waitFor(	char* ans1, 
-							char* ans2, 
-							char* ans3 )
+uint8_t WaspUART::waitFor(	const char* ans1, 
+							const char* ans2, 
+							const char* ans3 )
 {
 	return waitFor( ans1, ans2, ans3, NULL, _def_timeout );	
 }				
 						
 
-uint8_t WaspUART::waitFor(	char* ans1, 
-							char* ans2,
-							char* ans3,  
+uint8_t WaspUART::waitFor(	const char* ans1, 
+							const char* ans2,
+							const char* ans3,  
 							uint32_t timeout)
 {
 	return waitFor( ans1, ans2, ans3, NULL, timeout );	
 }				
 			
 	
-uint8_t WaspUART::waitFor(	char* ans1, 
-							char* ans2, 
-							char* ans3, 
-							char* ans4)
+uint8_t WaspUART::waitFor(	const char* ans1, 
+							const char* ans2, 
+							const char* ans3, 
+							const char* ans4)
 {
 	return waitFor( ans1, ans2, ans3, ans4, _def_timeout );	
 }		
 
 
-uint8_t  WaspUART::waitFor( char* ans1, 
-							char* ans2, 
-							char* ans3, 
-							char* ans4, 
+uint8_t  WaspUART::waitFor( const char* ans1, 
+							const char* ans2, 
+							const char* ans3, 
+							const char* ans4, 
 							uint32_t timeout )
 { 
 	// index counter
@@ -662,13 +662,13 @@ void WaspUART::latencyDelay()
  * 
  * @param	char* str: pointer to the buffer where parsed data is stored
  * @param	uint16_t size: size of input 'str' buffer
- * @param	char* delimiters: string containing the delimiter characters
+ * @param	const char* delimiters: string containing the delimiter characters
  * 
  * @return 	
  * 	@arg	'0' if ok
  * 	@arg	'1' if error
  */
-uint8_t WaspUART::parseString(char* str, uint16_t size, char* delimiters)
+uint8_t WaspUART::parseString(char* str, uint16_t size, const char* delimiters)
 {
 	// define the pointer to seek for token
 	char* pch;
@@ -696,14 +696,14 @@ uint8_t WaspUART::parseString(char* str, uint16_t size, char* delimiters)
  * 
  * @param	char* str: pointer to the buffer where parsed data is stored
  * @param	uint16_t size: size of input 'str' buffer
- * @param	char* delimiters: string containing the delimiter characters
+ * @param	const char* delimiters: string containing the delimiter characters
  * @param	uint8_t n: number of element to search for in the string of elements
  * 
  * @return 	
  * 	@arg	'0' if ok
  * 	@arg	'1' if error
  */
-uint8_t WaspUART::parseString(char* str, uint16_t size, char* delimiters, uint8_t n)
+uint8_t WaspUART::parseString(char* str, uint16_t size, const char* delimiters, uint8_t n)
 {
 	// define the pointer to seek for token
 	char* pch;
@@ -742,13 +742,13 @@ uint8_t WaspUART::parseString(char* str, uint16_t size, char* delimiters, uint8_
  * 			Then you can call: parseFloat(&variable, "\r\n")
  * 
  * @param	float* value: pointer to the variable where parsed data is stored
- * @param	char* delimiters: string containing the delimiter characters
+ * @param	const char* delimiters: string containing the delimiter characters
  * 
  * @return 	
  * 	@arg	'0' if ok
  * 	@arg	'1' if error
  */
-uint8_t WaspUART::parseFloat(float* value, char* delimiters)
+uint8_t WaspUART::parseFloat(float* value, const char* delimiters)
 {
 	// define the pointer to seek for token
 	char* pch;
@@ -777,13 +777,13 @@ uint8_t WaspUART::parseFloat(float* value, char* delimiters)
  * 			Then you can call: parseUint8(&variable, "\r\n")
  * 
  * @param	uint8_t* value: pointer to the variable where parsed data is stored
- * @param	char* delimiters: string containing the delimiter characters
+ * @param	const char* delimiters: string containing the delimiter characters
  * 
  * @return 	
  * 	@arg	'0' if ok
  * 	@arg	'1' if error
  */
-uint8_t WaspUART::parseUint8(uint8_t* value, char* delimiters)
+uint8_t WaspUART::parseUint8(uint8_t* value, const char* delimiters)
 {
 	// define the pointer to seek for token
 	char* pch;
@@ -812,14 +812,14 @@ uint8_t WaspUART::parseUint8(uint8_t* value, char* delimiters)
  * 			Then you can call: parseUint8(&variable, "\r\n")
  * 
  * @param	uint8_t* value: pointer to the variable where parsed data is stored
- * @param	char* delimiters: string containing the delimiter characters
+ * @param	const char* delimiters: string containing the delimiter characters
  * @param	uint8_t n: number of element to search for in the string of elements
  * 
  * @return 	
  * 	@arg	'0' if ok
  * 	@arg	'1' if error
  */
-uint8_t WaspUART::parseUint8(uint8_t* value, char* delimiters, uint8_t n)
+uint8_t WaspUART::parseUint8(uint8_t* value, const char* delimiters, uint8_t n)
 {
 	// define the pointer to seek for token
 	char* pch;
@@ -859,13 +859,13 @@ uint8_t WaspUART::parseUint8(uint8_t* value, char* delimiters, uint8_t n)
  * 			Then you can call: parseUint32(&variable, "\r\n")
  * 
  * @param	uint32_t* value: pointer to the variable where parsed data is stored
- * @param	char* delimiters: string containing the delimiter characters
+ * @param	const char* delimiters: string containing the delimiter characters
  * 
  * @return 	
  * 	@arg	'0' if ok
  * 	@arg	'1' if error
  */
-uint8_t WaspUART::parseUint32(uint32_t* value, char* delimiters)
+uint8_t WaspUART::parseUint32(uint32_t* value, const char* delimiters)
 {
 	// define the pointer to seek for token
 	char* pch;
@@ -891,13 +891,13 @@ uint8_t WaspUART::parseUint32(uint32_t* value, char* delimiters)
  * 			Then you can call: parseInt32(&variable, "\r\n")
  * 
  * @param	int32_t* value: pointer to the variable where parsed data is stored
- * @param	char* delimiters: string containing the delimiter characters
+ * @param	const char* delimiters: string containing the delimiter characters
  * 
  * @return 	
  * 	@arg	'0' if ok
  * 	@arg	'1' if error
  */
-uint8_t WaspUART::parseInt32(int32_t* value, char* delimiters)
+uint8_t WaspUART::parseInt32(int32_t* value, const char* delimiters)
 {
 	// define the pointer to seek for token
 	char* pch;
@@ -922,13 +922,13 @@ uint8_t WaspUART::parseInt32(int32_t* value, char* delimiters)
  * 			Then you can call: parseInt32(&variable, "\r\n")
  * 
  * @param	int32_t* value: pointer to the variable where parsed data is stored
- * @param	char* delimiters: string containing the delimiter characters
+ * @param	const char* delimiters: string containing the delimiter characters
  * 
  * @return 	
  * 	@arg	'0' if ok
  * 	@arg	'1' if error
  */
-uint8_t WaspUART::parseInt32(int32_t* value, char* delimiters, uint8_t n)
+uint8_t WaspUART::parseInt32(int32_t* value, const char* delimiters, uint8_t n)
 {
 	// define the pointer to seek for token
 	char* pch;
@@ -967,13 +967,13 @@ uint8_t WaspUART::parseInt32(int32_t* value, char* delimiters, uint8_t n)
  * 			Then you can call: parseUint32(&variable, "\r\n")
  * 
  * @param	uint16_t* value: pointer to the variable where parsed data is stored
- * @param	char* delimiters: string containing the delimiter characters
+ * @param	const char* delimiters: string containing the delimiter characters
  * 
  * @return 	
  * 	@arg	'0' if ok
  * 	@arg	'1' if error
  */
-uint8_t WaspUART::parseInt(int* value, char* delimiters)
+uint8_t WaspUART::parseInt(int* value, const char* delimiters)
 {
 	// define the pointer to seek for token
 	char* pch;
