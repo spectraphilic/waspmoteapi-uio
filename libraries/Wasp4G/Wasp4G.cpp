@@ -4553,7 +4553,7 @@ uint8_t Wasp4G::receive(uint8_t socketId, uint32_t timeout)
 			break;
 		}
 
-		if (timeout == NULL)
+		if (timeout == 0)
 		{
 			return 1;
 		}

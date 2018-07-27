@@ -121,67 +121,67 @@ public:
 	
 	//! It sends a command through the selected uart expecting a specific answer
     /*!
-	\param char* command : string to send to the module
-	\param char* ans1 : string expected to be answered by the module
+	\param const char* command : string to send to the module
+	\param const char* ans1 : string expected to be answered by the module
 	\return '0' if timeout error, 
 			'1' if ans1
 	*/
-	uint8_t sendCommand(char* command, 
-						char* ans1);
+	uint8_t sendCommand(const char* command, 
+						const char* ans1);
 						
-	uint8_t sendCommand(char* command, 
-						char* ans1, 
+	uint8_t sendCommand(const char* command, 
+						const char* ans1, 
 						uint32_t timeout);
 	
 	//! It sends a command through the selected uart expecting specific answers
     /*!
-	\param char* command : string to send to the module
-	\param char* ans1 : string expected to be answered by the module
-	\param char* ans2 : string expected to be answered by the module
+	\param const char* command : string to send to the module
+	\param const char* ans1 : string expected to be answered by the module
+	\param const char* ans2 : string expected to be answered by the module
 	\param uint32_t timeout : time to wait for responses before exit with error
 	\return '0' if timeout error, 
 			'1' if ans1
 			'2' if ans2
 	 */	
-	uint8_t sendCommand(char* command, 
-						char* ans1, 
-						char* ans2);
+	uint8_t sendCommand(const char* command, 
+						const char* ans1, 
+						const char* ans2);
 						
-	uint8_t sendCommand(char* command, 
-						char* ans1, 
-						char* ans2, 
+	uint8_t sendCommand(const char* command, 
+						const char* ans1, 
+						const char* ans2, 
 						uint32_t timeout);
 	
 	//! It sends a command through the selected uart expecting specific answers
     /*!
-	\param char* command : string to send to the module
-	\param char* ans1 : string expected to be answered by the module
-	\param char* ans2 : string expected to be answered by the module
-	\param char* ans3 : string expected to be answered by the module
+	\param const char* command : string to send to the module
+	\param const char* ans1 : string expected to be answered by the module
+	\param const char* ans2 : string expected to be answered by the module
+	\param const char* ans3 : string expected to be answered by the module
 	\param uint32_t timeout : time to wait for responses before exit with error
 	\return '0' if timeout error, 
 			'1' if ans1
 			'2' if ans2
 			'3' if ans3
 	 */	
-	uint8_t sendCommand(char* command, 
-						char* ans1, 
-						char* ans2, 
-						char* ans3 );
+	uint8_t sendCommand(const char* command, 
+						const char* ans1, 
+						const char* ans2, 
+						const char* ans3 );
 						
-	uint8_t sendCommand(char* command, 
-						char* ans1, 
-						char* ans2,
-						char* ans3,  
+	uint8_t sendCommand(const char* command, 
+						const char* ans1, 
+						const char* ans2,
+						const char* ans3,  
 						uint32_t timeout);
 	
 	//! It sends a command through the selected uart expecting specific answers
     /*!
-	\param char* command : string to send to the module
-	\param char* ans1 : string expected to be answered by the module
-	\param char* ans2 : string expected to be answered by the module
-	\param char* ans3 : string expected to be answered by the module
-	\param char* ans4 : string expected to be answered by the module
+	\param const char* command : string to send to the module
+	\param const char* ans1 : string expected to be answered by the module
+	\param const char* ans2 : string expected to be answered by the module
+	\param const char* ans3 : string expected to be answered by the module
+	\param const char* ans4 : string expected to be answered by the module
 	\param uint32_t timeout : time to wait for responses before exit with error
 	\return '0' if timeout error, 
 			'1' if ans1
@@ -189,21 +189,21 @@ public:
 			'3' if ans3
 			'4' if ans4
 	 */	
-	uint8_t sendCommand(char* command, 
-						char* ans1, 
-						char* ans2, 
-						char* ans3, 
-						char* ans4);
+	uint8_t sendCommand(const char* command, 
+						const char* ans1, 
+						const char* ans2, 
+						const char* ans3, 
+						const char* ans4);
 						
-	uint8_t sendCommand(char* command, 
-						char* ans1, 
-						char* ans2, 
-						char* ans3, 
-						char* ans4, 
+	uint8_t sendCommand(const char* command, 
+						const char* ans1, 
+						const char* ans2, 
+						const char* ans3, 
+						const char* ans4, 
 						uint32_t timeout);
 						
 	//! It seeks 'pattern' inside the 'buffer' array
-	bool find(uint8_t* buffer, uint16_t length, char* pattern);	
+	bool find(uint8_t* buffer, uint16_t length, const char* pattern);	
 	
 	//! It sends a command without waiting answer (only send)
 	void sendCommand(uint8_t* command, uint16_t length);
@@ -211,11 +211,11 @@ public:
 	/*!
 	\brief	This function waits for one of the answers during a certain period 
 			of time. The result is stored in '_buffer'.
-	\param	char* command: command to be sent
-	\param	char* ans1: expected answer
-	\param	char* ans2: expected answer
-	\param	char* ans3: expected answer
-	\param	char* ans4: expected answer
+	\param	const char* command: command to be sent
+	\param	const char* ans1: expected answer
+	\param	const char* ans2: expected answer
+	\param	const char* ans3: expected answer
+	\param	const char* ans4: expected answer
 	\param  uint32_t timeout : time to wait for responses before exit with error
 	\return '0' if timeout error, 
 			'1' if ans1
@@ -223,14 +223,14 @@ public:
 			'3' if ans3
 			'4' if ans4
 	*/
-	uint8_t waitFor( char* ans1);
-	uint8_t waitFor( char* ans1, uint32_t timeout);
-	uint8_t waitFor( char* ans1, char* ans2);			
-	uint8_t waitFor( char* ans1, char* ans2, uint32_t timeout);
-	uint8_t waitFor( char* ans1, char* ans2, char* ans3 );	
-	uint8_t waitFor( char* ans1, char* ans2, char* ans3, uint32_t timeout);
-	uint8_t waitFor( char* ans1, char* ans2, char* ans3, char* ans4);
-	uint8_t waitFor( char* ans1, char* ans2, char* ans3, char* ans4, uint32_t timeout);
+	uint8_t waitFor( const char* ans1);
+	uint8_t waitFor( const char* ans1, uint32_t timeout);
+	uint8_t waitFor( const char* ans1, const char* ans2);			
+	uint8_t waitFor( const char* ans1, const char* ans2, uint32_t timeout);
+	uint8_t waitFor( const char* ans1, const char* ans2, const char* ans3 );	
+	uint8_t waitFor( const char* ans1, const char* ans2, const char* ans3, uint32_t timeout);
+	uint8_t waitFor( const char* ans1, const char* ans2, const char* ans3, const char* ans4);
+	uint8_t waitFor( const char* ans1, const char* ans2, const char* ans3, const char* ans4, uint32_t timeout);
 	
 	//! Read the contents of the rx buffer
 	uint16_t readBuffer(uint16_t requestBytes);
@@ -245,28 +245,28 @@ public:
 protected:
 	
 	//! It parses the contents of _buffer and copies the string to the pointer
-	uint8_t parseString(char* str, uint16_t size, char* delimiters);
-	uint8_t parseString(char* str, uint16_t size, char* delimiters, uint8_t n);
+	uint8_t parseString(char* str, uint16_t size, const char* delimiters);
+	uint8_t parseString(char* str, uint16_t size, const char* delimiters, uint8_t n);
 	
 	//! It parses the contents of _buffer and converts it to a float type
-	uint8_t parseFloat(float* value, char* delimiters);
+	uint8_t parseFloat(float* value, const char* delimiters);
 	
 	//! It parses the contents of _buffer and converts it to a uint8_t type
-	uint8_t parseUint8(uint8_t* value, char* delimiters);
-	uint8_t parseUint8(uint8_t* value, char* delimiters, uint8_t n);
+	uint8_t parseUint8(uint8_t* value, const char* delimiters);
+	uint8_t parseUint8(uint8_t* value, const char* delimiters, uint8_t n);
 	
 	//! It parses the contents of _buffer and converts it to a uint32_t type
-	uint8_t parseUint32(uint32_t* value, char* delimiters);	
+	uint8_t parseUint32(uint32_t* value, const char* delimiters);	
 
 	//! It parses the contents of _buffer and converts it to a int32_t type
-	uint8_t parseInt32(int32_t* value, char* delimiters);
-	uint8_t parseInt32(int32_t* value, char* delimiters, uint8_t n);
+	uint8_t parseInt32(int32_t* value, const char* delimiters);
+	uint8_t parseInt32(int32_t* value, const char* delimiters, uint8_t n);
 
 	//! It parses the contents of _buffer and converts it to a int type
-	uint8_t parseInt(int* value, char* delimiters);	
+	uint8_t parseInt(int* value, const char* delimiters);	
 	
 	//! It parses the contents of _buffer and converts it to a uint16_t type
-	uint8_t parseHex(uint8_t* value, char* delimiters);	
+	uint8_t parseHex(uint8_t* value, const char* delimiters);	
 	
 };
 
