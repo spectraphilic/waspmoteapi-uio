@@ -264,6 +264,8 @@
 #define SENSOR_MB73XX 204
 #define SENSOR_GPS_STATS 205 // Time waiting for signal, and time skew
 #define SENSOR_VOLTS 206 // Battery voltage
+#define SENSOR_WS100_1 207 // SDI-12 WS100-UMB
+#define SENSOR_WS100_2 208 // SDI-12 WS100-UMB
 
 
 
@@ -527,6 +529,8 @@ const char	str_frame_203[]	PROGMEM = "DS1820";
 const char	str_frame_204[]	PROGMEM = "MB73XX";
 const char	str_frame_205[]	PROGMEM = "GPS_STATS";
 const char	str_frame_206[]	PROGMEM = "VOLTS";
+const char	str_frame_207[]	PROGMEM = "WS100_1";
+const char	str_frame_208[]	PROGMEM = "WS100_2";
 
 
 /******************************************************************************* 
@@ -749,6 +753,8 @@ const char* const FRAME_SENSOR_TABLE[] PROGMEM=
 	str_frame_204,
 	str_frame_205,
 	str_frame_206,
+	str_frame_207,
+	str_frame_208,
 	
 };
 	
@@ -1011,6 +1017,8 @@ const uint8_t FRAME_SENSOR_TYPE_TABLE[] PROGMEM=
 	4, // MB73XX
 	4, // GPS_STATS
 	2, // VOLTS
+	2, // WS100
+	0, // WS100
 	
 };
 
@@ -1272,6 +1280,8 @@ const uint8_t FRAME_SENSOR_FIELD_TABLE[] PROGMEM=
 	2, // MB73XX
 	2, // GPS_STATS
 	1, // VOLTS
+	3, // WS100
+	1, // WS100
 	
 };
 	
@@ -1526,6 +1536,8 @@ const uint8_t FRAME_DECIMAL_TABLE[] PROGMEM =
 	0, // MB73XX
 	0, // GPS_STATS
 	2, // VOLTS
+	2, // WS100
+	0, // WS100
 	
 };
 	
