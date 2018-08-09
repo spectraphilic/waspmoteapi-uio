@@ -1504,7 +1504,7 @@ public:
 	\brief 	This function sets the RTC time from 4G network info
 	\return '0' if OK; '1' if error
 	 */
-	uint8_t setTimeFrom4G();
+	uint8_t setTimeFrom4G(bool utc=false);
 
     /*!
 	\brief 	This function sets the apn from operator
