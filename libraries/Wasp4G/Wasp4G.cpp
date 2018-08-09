@@ -6474,7 +6474,7 @@ uint8_t Wasp4G::getWirelessNetwork()
  * @return '0' if OK; '1' if error
  * 
  */
-uint8_t Wasp4G::setTimeFrom4G()
+uint8_t Wasp4G::setTimeFrom4G(bool utc)
 {
 	int8_t answer, networkType;
 	char format[60];
@@ -6539,9 +6539,30 @@ uint8_t Wasp4G::setTimeFrom4G()
 			USB.print(F("RTC time before: "));
 			USB.println(RTC.getTime());
 		#endif
-		
+
+		// Convert to UTC
+		uint8_t dow;
+		if (utc && timezone != 0)
+		{
+			uint32_t epoch = RTC.getEpochTime(year, month, day, hour, minute, second);
+			epoch = epoch - (timezone * 15 * 60);
+			timestamp_t tm;
+			RTC.breakTimeAbsolute(epoch, &tm);
+			second = tm.second;
+			minute = tm.minute;
+			hour = tm.hour;
+			dow = tm.day;
+			day = tm.date;
+			month = tm.month;
+			year = tm.year;
+		}
+		else
+		{
+			dow = (uint8_t)RTC.dow((int)year, (int)month, (int)day);
+		}
+
 		// set Time & Date
-		RTC.setTime( year, month, day, (uint8_t)RTC.dow((int)year, (int)month, (int)day), hour, minute, second);
+		RTC.setTime( year, month, day, dow, hour, minute, second);
 		
 		#if DEBUG_WASP4G > 0
 			USB.print(F("RTC time after: "));
