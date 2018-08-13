@@ -683,6 +683,37 @@ void WaspFrame::createFrame(uint8_t mode)
 	}
 	else if (_mode == BINARY)
 	{
+		createFrameBin(mode);
+	}
+}
+
+
+void WaspFrame::createFrameBin(uint8_t mode)
+{      
+	// local variables
+	uint8_t sequence;
+	char str[17];
+
+	// store mode: ASCII or BINARY
+	_mode = mode;
+	
+	// store default Frame type
+	_frameType = INFORMATION_FRAME_V15;
+
+	// init buffer
+	memset( buffer, 0x00, sizeof(buffer) );
+	memset( field, 0x00, sizeof(field) );
+
+	// init counter
+	numFields = 0;
+
+	// set frame delimiter
+	buffer[0] = '<';
+	buffer[1] = '=';
+	buffer[2] = '>';
+
+	uint8_t type;
+
 		/** BINARY FRAME **/
 		if (_boot_version >= 'G')
 		{
@@ -771,8 +802,6 @@ void WaspFrame::createFrame(uint8_t mode)
 
 		sequence++;
 		storeSequence(sequence);
-
-	}
 }
 
 /**

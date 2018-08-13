@@ -272,6 +272,7 @@ public:
      */
 	uint16_t getFrameSize( void );
 
+    void createFrameBin(uint8_t mode);
     void createFrame(uint8_t mode);
     void createFrame(uint8_t mode, char* moteID);
 
