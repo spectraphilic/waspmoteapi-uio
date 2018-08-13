@@ -281,6 +281,7 @@ public:
      * EEPROM memory.
      */ 
     void createFrame(uint8_t mode);   
+    void createFrameBin(uint8_t mode);   
   
     //! Function : creates a new frame
     /*! This function creates a new frame.
