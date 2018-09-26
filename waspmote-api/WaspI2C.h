@@ -79,6 +79,9 @@
 #define I2C_ADDRESS_GASES_SOCKET_2A_2B	0x2C
 #define I2C_ADDRESS_GASES_SOCKET_3_3B	0x2E
 
+// UIO Lemming board
+#define I2C_ADDRESS_Lemming_BME280		0x76 // Internal temperature, Relative humidity and atmospheric pressure
+
 // UIO Lagopus sensor board
 #define I2C_ADDRESS_LAGOPUS_BME280		0x77 // Air temperature, Relative humidity and atmospheric pressure
 #define I2C_ADDRESS_LAGOPUS_TMP102		0x48 // Air temperature
