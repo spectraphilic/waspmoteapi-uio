@@ -87,7 +87,6 @@
 #define I2C_ADDRESS_LAGOPUS_TMP102		0x48 // Air temperature
 #define I2C_ADDRESS_LAGOPUS_VL53L1X		0x29 // Distance (Snow depth)
 #define I2C_ADDRESS_LAGOPUS_MLX90614	0x5A // Surface temperature
-#define I2C_ADDRESS_LAGOPUS_APDS-9301	0x39 // Ambient light
 #define I2C_ADDRESS_LAGOPUS_AS726X		0x49 // Spectral Sensor
 
 /******************************************************************************
