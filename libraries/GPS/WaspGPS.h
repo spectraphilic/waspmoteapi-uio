@@ -46,6 +46,7 @@
 	Commenting this line, the debug messages will be disabled.
  */
  //#define GPS_DEBUG 1
+ #define GPS_DEBUG 1
 
  // define print message
  #define PRINT_GPS(str)	USB.print(F("[GPS] ")); USB.print(str);
