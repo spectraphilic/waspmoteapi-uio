@@ -159,9 +159,9 @@
     \brief RTC Addresses constants to use in function 'readRTC'. Use when time, 
     date, alarm1 and alarm2 wants to be read from the RTC
  */
-#define	RTC_DATE_ADDRESS_2		6	
-#define	RTC_ALARM1_ADDRESS		10	
-#define	RTC_ALARM2_ADDRESS		13	
+#define	RTC_DATE_ADDRESS_2		7	
+#define	RTC_ALARM1_ADDRESS		11	
+#define	RTC_ALARM2_ADDRESS		14	
 
 /*! \def RTC_ALM1_MODE1
     \brief RTC Alarm Modes. Day of the week,hours,minutes and seconds match
