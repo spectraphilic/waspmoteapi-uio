@@ -193,6 +193,8 @@ class BME280
 {
 	private:
 
+	uint8_t _address;
+
 	/// Calibration variables
 	uint16_t dig_T1;
 	int16_t dig_T2;
@@ -242,7 +244,7 @@ class BME280
 	public:
 
 	// Constructors
-	BME280();
+	BME280(uint8_t address=I2C_ADDRESS_GASPRO_BME280);
 
 	/// POWER AND CONFIGURATION FUNCTIONS
 	//! This function checks if the module is accesible via I2C and
