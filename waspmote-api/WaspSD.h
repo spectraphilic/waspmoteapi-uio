@@ -52,8 +52,6 @@
     \brief Uncomment this definition to enable the DEBUG mode in some functions
 */
 //~ #define SD_DEBUG
-#define SD_DEBUG
-
 #define PRINT_SD(str)	USB.print(F("[SD] ")); USB.print(str);
 #define PRINTLN_SD(str)	USB.print(F("[SD] ")); USB.println(str);
 
