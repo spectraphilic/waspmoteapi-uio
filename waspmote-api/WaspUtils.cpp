@@ -1274,7 +1274,7 @@ uint8_t WaspUtils::converter(uint8_t conv1, uint8_t conv2)
  *						char *  	__s ) 	
  * 
  */
-void WaspUtils::float2String (float fl, char str[], int N) 
+char* WaspUtils::float2String (float fl, char str[], int N) 
 {
 
 	boolean neg = false;
@@ -1324,6 +1324,8 @@ void WaspUtils::float2String (float fl, char str[], int N)
 		indice++;
 	}
 	str[indice]='\0';
+
+	return str;
 }
 
 
