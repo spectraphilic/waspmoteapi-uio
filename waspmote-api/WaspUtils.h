@@ -524,7 +524,7 @@ class WaspUtils
   \param int N : the number of decimals
   \return void
    */
-  void float2String(float fl, char str[], int N);
+  char* float2String(float fl, char str[], int N);
   
   //! It writes into the EEPROM the name of the OTA file
   /*!
