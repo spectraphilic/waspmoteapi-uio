@@ -126,7 +126,7 @@ public:
 	uint8_t readBit(uint8_t devAddr, uint8_t regAddr, uint8_t *data, uint8_t pos);	
 
 	uint8_t scan(uint8_t devAddr);
-	uint8_t scanSlaves();
+	uint8_t scanSlaves() __attribute__((weak));
 	
 };
 
