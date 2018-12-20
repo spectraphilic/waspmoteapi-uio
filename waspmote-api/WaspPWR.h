@@ -197,7 +197,7 @@ class WaspPWR
 		\arg SENS_OFF
 	\return void
 	 */ 
-	void setSensorPower(uint8_t type, uint8_t mode);
+	void setSensorPower(uint8_t type, uint8_t mode) __attribute__((weak));
 	
     /*!
     \brief It enables or disables watchdog interruption
