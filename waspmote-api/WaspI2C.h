@@ -101,7 +101,7 @@ public:
 
 	void begin();
 	void close();
-	void secureBegin();
+	void secureBegin() __attribute__((weak));
 	void recover();
 	
 	uint8_t write(uint8_t devAddr, uint8_t regAddr, uint8_t data);
