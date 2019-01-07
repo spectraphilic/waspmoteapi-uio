@@ -56,7 +56,8 @@
 
 
 //!< TWI data transfer rate
-#define TWI_SPEED_HZ         125000       
+//#define TWI_SPEED_HZ         125000   
+#define TWI_SPEED_HZ         80000 // Max I2C clock speed when using MLX sensor
 
 
 /**
