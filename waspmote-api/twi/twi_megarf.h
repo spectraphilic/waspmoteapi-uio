@@ -56,7 +56,7 @@
 
 
 //!< TWI data transfer rate
-#define TWI_SPEED_HZ         125000       
+#define TWI_SPEED_HZ         125000 __attribute__((weak))      
 
 
 /**
