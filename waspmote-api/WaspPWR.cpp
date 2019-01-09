@@ -91,8 +91,17 @@ uint8_t WaspPWR::getIPF()
  * type: SENS_3V3 or SENS_5V
  * mode: SENS_ON or SENS_OFF
  */
-void WaspPWR::setSensorPower(uint8_t type, uint8_t mode)
+bool WaspPWR::setSensorPower(uint8_t type, uint8_t mode)
 {
+	// UiO changes
+	if (type == SENS_I2C) { type = SENS_3V3; } // By default I2C is just 3V3
+	uint8_t reg = (type == SENS_3V3)? REG_3V3: REG_5V;
+	bool old_value = (bool)(WaspRegister & reg);
+	// If nothing changes, do nothing
+	if ((mode == SENS_ON && old_value) || ! old_value)
+	{ return old_value; }
+
+
 	pinMode(SENS_PW_3V3,OUTPUT);
 	pinMode(SENS_PW_5V,OUTPUT);
 	
@@ -128,6 +137,8 @@ void WaspPWR::setSensorPower(uint8_t type, uint8_t mode)
 						
 		default:		break;
 	}
+
+	return old_value;
 }
 
 
@@ -247,6 +258,7 @@ void WaspPWR::switchesOFF(uint8_t option)
 	if ((option == ALL_OFF) || (option == SENS_OFF) || (option == SOCKET0_ON))
 	{	
 		// switch OFF sensor boards
+		PWR.setSensorPower(SENS_I2C, SENS_OFF);
 		PWR.setSensorPower(SENS_3V3, SENS_OFF);
 		PWR.setSensorPower(SENS_5V, SENS_OFF);		
 	}
