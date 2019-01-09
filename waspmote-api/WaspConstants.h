@@ -430,6 +430,7 @@ static const uint32_t	REG_XTR				=	32768;		// bit 15
  */
 #define	SENS_3V3	0
 #define	SENS_5V		1
+#define	SENS_I2C	2
 
 
 /*! \def boolean

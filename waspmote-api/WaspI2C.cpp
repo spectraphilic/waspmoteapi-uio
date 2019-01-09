@@ -520,23 +520,16 @@ uint8_t WaspI2C::readBit(uint8_t devAddr,
  */
 void WaspI2C::secureBegin()
 {		
-	// Get the 3V3 power supply state
-	_power_3v3_on = WaspRegister & REG_3V3;	
-	
 	// this codeblock belongs to the performance of the I2C bus
 	// check if any Sensor Board (with I2C components) is ON before using I2C
 	if (_slavePresent == true)
 	{	
-		#if DEBUG_I2C > 0
-			PRINT_I2C(F("Sensor Board power ON\n"));
-		#endif		
 		// It is necessary to switch on the power supply if the Sensor Board is 
 		// connected to Waspmote so as not to cause intereferences in the I2C bus
-		if (!_power_3v3_on)
+		if (PWR.setSensorPower(SENS_I2C, SENS_ON) == false)
 		{
-			PWR.setSensorPower(SENS_3V3, SENS_ON);
 			delay(50);
-		}		
+		}
 	}		
 }
 
