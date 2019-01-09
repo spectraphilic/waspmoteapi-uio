@@ -258,7 +258,6 @@ void WaspPWR::switchesOFF(uint8_t option)
 	if ((option == ALL_OFF) || (option == SENS_OFF) || (option == SOCKET0_ON))
 	{	
 		// switch OFF sensor boards
-		PWR.setSensorPower(SENS_I2C, SENS_OFF);
 		PWR.setSensorPower(SENS_3V3, SENS_OFF);
 		PWR.setSensorPower(SENS_5V, SENS_OFF);		
 	}
@@ -513,13 +512,6 @@ void WaspPWR::deepSleep(const char* time2wake,
 	// enable the microcontroller sleep mode
 	sleep_enable();
 	
-	// switches off depending on the option selected  
-	switchesOFF(option);
-	
-	// mandatory delay to wait for MUX_RX stabilization 
-	// after switching off the sensor boards 
-	delay(100);
-	
 	// RTC ON
 	RTC.ON();
 	// set Alarm
@@ -544,6 +536,13 @@ void WaspPWR::deepSleep(const char* time2wake,
 		return (void)0;
 	}
     RTC.OFF();
+	
+	// switches off depending on the option selected  
+	switchesOFF(option);
+	
+	// mandatory delay to wait for MUX_RX stabilization 
+	// after switching off the sensor boards 
+	delay(100);
 	
 	// switch off main power supply when needed:
 	// -> ACC interruption is disabled
