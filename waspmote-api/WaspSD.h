@@ -161,7 +161,7 @@ private:
 	//! Variable : root is used for SD card's root directory file
 	/*!
 	*/
-	void setFileDate();
+	void setFileDate() __attribute__((weak));
 
 
 public:
