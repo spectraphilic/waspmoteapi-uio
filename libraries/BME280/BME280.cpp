@@ -148,14 +148,7 @@ float BME280::compensateHum(long uncompensated_hum)
 */
 int8_t BME280::ON()
 {
-	if ((WaspRegister & REG_3V3) == 0)
-	{
-		PWR.setSensorPower(SENS_3V3, SENS_ON);
-		#if BME280_DEBUG>0
-			PRINT_BME(F("BME280.3V3 to ON \n"));
-		#endif
-	}
-	
+	PWR.setSensorPower(SENS_I2C, SENS_ON);
 	I2C.begin();
 	
 	delay(100);

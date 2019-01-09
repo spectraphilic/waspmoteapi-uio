@@ -56,17 +56,13 @@ int main(void)
 	}
 	
 	// power on the 3V3 to search BME devices directly connected to SDA and SCL
-	PWR.setSensorPower(SENS_3V3, SENS_ON);
+	PWR.setSensorPower(SENS_I2C, SENS_ON);
 	delay(100);
 	
 	// scan for i2c sensors
-	if (I2C.scanSlaves())
+	if (! I2C.scanSlaves())
 	{
-		PWR.setSensorPower(SENS_3V3, SENS_ON);
-	}
-	else
-	{
-		PWR.setSensorPower(SENS_3V3, SENS_OFF);		
+		PWR.setSensorPower(SENS_I2C, SENS_OFF);		
 	}
 	
 	uint8_t rtc_hibernate_triggered = digitalRead(RTC_INT_PIN_MON);
