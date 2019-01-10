@@ -94,6 +94,12 @@ uint8_t WaspPWR::getIPF()
 bool WaspPWR::setSensorPower(uint8_t type, uint8_t mode)
 {
 	// UiO changes
+	if (type == SENS_ALL)
+	{
+		bool v33 = setSensorPower(SENS_3V3, mode);
+		bool v5 = setSensorPower(SENS_5V, mode);
+		return v33 || v5;
+	}
 	if (type == SENS_I2C) { type = SENS_3V3; } // By default I2C is just 3V3
 	uint8_t reg = (type == SENS_3V3)? REG_3V3: REG_5V;
 	bool old_value = (bool)(WaspRegister & reg);
@@ -258,8 +264,7 @@ void WaspPWR::switchesOFF(uint8_t option)
 	if ((option == ALL_OFF) || (option == SENS_OFF) || (option == SOCKET0_ON))
 	{	
 		// switch OFF sensor boards
-		PWR.setSensorPower(SENS_3V3, SENS_OFF);
-		PWR.setSensorPower(SENS_5V, SENS_OFF);		
+		PWR.setSensorPower(SENS_ALL, SENS_OFF);
 	}
 	
 	// close UART0
@@ -733,12 +738,7 @@ float WaspPWR::getBatteryVolts()
 		sbi(ADCSRA, ADEN);	
 
 		// check if it is necessary to turn on the 5v power supply
-		bool flag = WaspRegister & REG_5V;
-  
-		if (!flag)
-		{
-			PWR.setSensorPower(SENS_5V, SENS_ON);
-		}
+		bool flag = PWR.setSensorPower(SENS_5V, SENS_ON);
 
 		// power on the components
 		pinMode(BAT_MONITOR, INPUT);
