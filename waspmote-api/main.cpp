@@ -58,12 +58,6 @@ int main(void)
 	// power on the 3V3 to search BME devices directly connected to SDA and SCL
 	PWR.setSensorPower(SENS_I2C, SENS_ON);
 	delay(100);
-
-	// Ask MLX90614 to switch from PWM to SMBus, set SCL to LOW for more
-	// than 1.44ms
-	pinMode(I2C_SCL, OUTPUT);
-	digitalWrite(I2C_SCL, LOW);
-	delay(2);
 	
 	// scan for i2c sensors
 	if (! I2C.scanSlaves())
