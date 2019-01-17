@@ -122,4 +122,10 @@ extern const uint8_t PROGMEM digital_pin_to_timer_PGM[];
 #define portInputRegister(P) ( (volatile uint8_t *)( (uint16_t)pgm_read_byte( port_to_input_PGM + (P))) )
 #define portModeRegister(P) ( (volatile uint8_t *)( (uint16_t)pgm_read_byte( port_to_mode_PGM + (P))) )
 
+// So SoftwareSerial compiles
+#define digitalPinToPCICR(p) ( (false) ? (&PCICR) : ((uint8_t *)0) )
+#define digitalPinToPCICRbit(p) 0
+#define digitalPinToPCMSK(p) ( (false) ? (&PCMSK0) : ((uint8_t *)0) )
+#define digitalPinToPCMSKbit(p) 0
+
 #endif
