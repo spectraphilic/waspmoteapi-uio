@@ -110,7 +110,7 @@ void TwoWire::begin(int address)
  * @return '0' ok, '1' length too long for buffer
  * 
  */
-uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity)
+uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity, uint8_t sendStop)
 {
 	// Secure I2C power management
 	Wire.secureBegin();
@@ -122,7 +122,7 @@ uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity)
 	}
 	
 	// perform blocking read into buffer
-	uint8_t ret = twi_readFrom(address, rxBuffer, quantity);
+	uint8_t ret = twi_readFrom(address, rxBuffer, quantity, sendStop);
 	
 	// set rx buffer iterator vars
 	rxBufferIndex = 0;
@@ -155,13 +155,13 @@ void TwoWire::beginTransmission(int address)
   beginTransmission((uint8_t)address);
 }
 
-uint8_t TwoWire::endTransmission(void)
+uint8_t TwoWire::endTransmission(uint8_t sendStop)
 {
 	// Secure I2C power management
 	Wire.secureBegin();
 	
 	// transmit buffer (blocking)
-	uint8_t ret = twi_writeTo(txAddress, txBuffer, txBufferLength, 1);
+	uint8_t ret = twi_writeTo(txAddress, txBuffer, txBufferLength, 1, sendStop);
 	// reset tx buffer iterator vars
 	txBufferIndex = 0;
 	txBufferLength = 0;
