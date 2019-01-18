@@ -81,6 +81,12 @@
 #define I2C_ADDRESS_GASES_SOCKET_2A_2B	0x2C
 #define I2C_ADDRESS_GASES_SOCKET_3_3B	0x2E
 
+/*
+ * UIO. Compatibility layer with Arduino's Wire library
+ */
+#define SCL I2C_SCL
+#define SDA I2C_SDA
+
 class TwoWire
 {
   private:
@@ -259,7 +265,15 @@ class TwoWire
 
 	//! This function switches off and on the I2C again
 	void recover();
-	
+
+	/*
+	 * UIO. Compatibility layer with Arduino's Wire library
+	 */
+
+	size_t write(uint8_t data) { return (size_t)send(data); }
+	int read(void) { return (int)receive(); }
+	void end() { close(); }
+
 };
 
 extern TwoWire Wire;
