@@ -520,7 +520,14 @@ void WaspPWR::deepSleep(const char* time2wake,
 	// RTC ON
 	RTC.ON();
 	// set Alarm
-	RTC.setAlarm1(time2wake,offset,mode); 
+	if (RTC.setAlarm1(time2wake,offset,mode))
+	{
+		RTC.disableAlarm1();
+		RTC.OFF();
+		I2C.recover();
+		USB.println(F("[PWR] deepSleep RTC error"));
+		return (void)0;
+	}
 	// get backup of selected Alarm	
 	uint8_t day_aux = RTC.day_alarm1; 
 	uint8_t hour_aux = RTC.hour_alarm1; 
