@@ -58,6 +58,7 @@ int main(void)
 	// power on the 3V3 to search BME devices directly connected to SDA and SCL
 	PWR.setSensorPower(SENS_I2C, SENS_ON);
 	delay(100);
+	RTC.ON();
 	
 	// scan for i2c sensors
 	if (! I2C.scanSlaves())
