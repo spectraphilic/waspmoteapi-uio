@@ -330,11 +330,11 @@ uint8_t WaspI2C::scan(uint8_t devAddr)
 	packet_received.addr_length  = TWI_SLAVE_NO_INTERNAL_ADDRESS; 	/* TWI slave memory address data size */
 	packet_received.chip         = (devAddr << 1); 		/* TWI slave bus address */
 	packet_received.buffer       = buffer; 	/* transfer data destination buffer */
-	packet_received.length       = 1; 		/* transfer data size (bytes) */
+	packet_received.length       = 0; 		/* transfer data size (bytes) */
 
 	/* Perform a multi-byte read access then check the result. */
 	I2C.secureBegin();
-	error = twi_master_read(&TWBR,&packet_received);
+	error = twi_master_write(&TWBR,&packet_received);
 	
 	return error;
 	
