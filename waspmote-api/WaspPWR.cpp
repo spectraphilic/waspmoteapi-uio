@@ -104,7 +104,7 @@ bool WaspPWR::setSensorPower(uint8_t type, uint8_t mode)
 	uint8_t reg = (type == SENS_3V3)? REG_3V3: REG_5V;
 	bool old_value = (bool)(WaspRegister & reg);
 	// If nothing changes, do nothing
-	if ((mode == SENS_ON && old_value) || ! old_value)
+	if ((mode == SENS_ON && old_value) || (mode == SENS_OFF && ! old_value))
 	{ return old_value; }
 
 
