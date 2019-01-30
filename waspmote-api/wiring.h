@@ -91,6 +91,7 @@ void closeSerial(uint8_t);
 void serialWrite(unsigned char, uint8_t);
 int serialAvailable(uint8_t);
 int serialRead(uint8_t);
+int serialPeek(uint8_t);
 void serialFlush(uint8_t);
 void printMode(int, uint8_t);
 void printByte(unsigned char c, uint8_t);
