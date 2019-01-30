@@ -138,6 +138,28 @@ int serialRead(uint8_t portNum)
 	}
 }
 
+int serialPeek(uint8_t portNum)
+{
+	if (portNum == 0) {
+		// if the head isn't ahead of the tail, we don't have any characters
+		if (rx_buffer_head0 == rx_buffer_tail0) {
+			return -1;
+		} else {
+			unsigned char c = rx_buffer0[rx_buffer_tail0];
+			return c;
+		}
+	}
+	else {
+		// if the head isn't ahead of the tail, we don't have any characters
+		if (rx_buffer_head1 == rx_buffer_tail1) {
+			return -1;
+		} else {
+			unsigned char c = rx_buffer1[rx_buffer_tail1];
+			return c;
+		}
+	}
+}
+
 void serialFlush(uint8_t portNum)
 {
 	// don't reverse this or there may be problems if the RX interrupt
