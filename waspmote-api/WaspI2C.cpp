@@ -79,15 +79,7 @@ void WaspI2C::close()
 	//~ cbi(TWCR,TWEA);
 	//~ cbi(TWCR,TWSTA);
 	//~ cbi(TWCR,TWWC);
-	//~ // switch off TWI depending on wether a sensor board is plugged or not
-	//~ if (WaspRegisterSensor & REG_PROTOTYPING)
-	//~ {
-		//~ cbi(TWCR,TWEN);
-	//~ }
-	//~ else
-	//~ {
-		//~ sbi(TWCR,TWEN);
-	//~ }
+	//~ sbi(TWCR,TWEN);
 	//~ cbi(TWCR,TWIE);
 	//~ sbi(PRR0,PRTWI);
 	
