@@ -287,9 +287,7 @@ void WaspPWR::switchesOFF(uint8_t option)
 	
 	// set Expansion board power supply off	unless a 
 	// Smart Cities board remains powered on 
-	if (((option == ALL_OFF) || (option == SENS_OFF) || (option == SOCKET0_ON))
-		&&  !(WaspRegisterSensor & REG_CITIES_V14) 
-		&&  !(WaspRegisterSensor & REG_CITIES_V15))
+	if (((option == ALL_OFF) || (option == SENS_OFF) || (option == SOCKET0_ON)))
 	{
 		pinMode(DIGITAL6, OUTPUT);
 		digitalWrite(DIGITAL6, LOW);
@@ -302,45 +300,9 @@ void WaspPWR::switchesOFF(uint8_t option)
 	// switch off monitoring pin
 	pinMode(BAT_MONITOR,OUTPUT);
 	digitalWrite(BAT_MONITOR,LOW);
-		
-	// check if an Cities PRO Sensor Board is used. 
-	if (WaspRegisterSensor & REG_CITIES_PRO)
-	{
-		// disable I2C isolator
-		digitalWrite(ANA0, LOW);
-	}
 	
-	// check if a Smart Metering board has been switched and proceed to disable 
-	// the digital pins so as not to waste energy
-	if (WaspRegisterSensor & REG_METERING)
-	{
-		setSensorPower(SENS_3V3,SENS_ON);
-		pinMode(DIGITAL3, OUTPUT);
-		pinMode(DIGITAL4, OUTPUT);
-		digitalWrite(DIGITAL3, HIGH);
-		digitalWrite(DIGITAL4, HIGH);
-	}
-	
-	// check if a Gases Sensor Board is used. In this case, switch off the 
-	// digital pins so as not to waste energy
-	if (WaspRegisterSensor & REG_GASES)
-	{
-		digitalWrite(DIGITAL4,LOW);
-	}
-	
-	// check if an Agriculture Sensor Board is used. In this case, 
-	// switch off the digital pins so as not to waste energy
-	if (WaspRegisterSensor & REG_AGRICULTURE)
-	{
-		// switch off sensors power supply
-		digitalWrite(DIGITAL7, LOW);
-		digitalWrite(DIGITAL1, LOW);
-		digitalWrite(DIGITAL5, LOW);
-		digitalWrite(DIGITAL3, LOW);
-		digitalWrite(DIGITAL6, LOW);
-		digitalWrite(ANA0, LOW);
-	}
-	
+	// TODO Disable digital pins
+
 	// set the interruption line down
 	pinMode(MUX_RX, INPUT);
 	digitalWrite(MUX_RX, LOW);
@@ -360,13 +322,6 @@ void WaspPWR::switchesON(uint8_t option)
 {
 	// switch Analog to Digital Converter ON
 	sbi(ADCSRA, ADEN);        		
-
-	// check if an Cities PRO Sensor Board is used. 
-	if ((WaspRegisterSensor & REG_CITIES_PRO) && ((option == SENSOR_ON) || (option == ALL_ON)))
-	{
-		// enable I2C isolator
-		digitalWrite(ANA0, HIGH);
-	}
 }
 
 
