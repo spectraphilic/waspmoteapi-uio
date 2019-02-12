@@ -37,14 +37,6 @@ int main(void)
 	pinMode(POWER_3V3, OUTPUT);
 	digitalWrite(POWER_3V3,HIGH);	
 
-	//Disable Mux in Xtreme boards
-	if (WaspRegisterSensor & REG_XTR)
-	{
-		//20 is MUX_EN in Xtreme board, HIGH for disabling
-		pinMode(20, OUTPUT);
-		digitalWrite(20, HIGH);
-	}
-	
 	// get bootloader version
 	_boot_version = Utils.getBootVersion();
 	
