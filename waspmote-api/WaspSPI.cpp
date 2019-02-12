@@ -239,34 +239,6 @@ void WaspSPI::setSPISlave(uint8_t SELECTION)
 	pinMode(SOCKET0_SS,OUTPUT);
 	digitalWrite(SOCKET0_SS,HIGH);
 
-	// disable Gases Pro
-	if (WaspRegisterSensor & REG_DUST_GASES_PRO)
-	{
-		pinMode(DUST_SENSOR_CS,OUTPUT);
-		digitalWrite(DUST_SENSOR_CS,HIGH);
-	}
-
-	// disable Smart Water ADC
-	if (WaspRegisterSensor & REG_WATER)
-	{
-		pinMode(DIGITAL4,OUTPUT);
-		digitalWrite(DIGITAL4,HIGH);
-	}
-
-	// disable Smart Ions
-	if (WaspRegisterSensor & REG_WATER_IONS)
-	{
-		pinMode(DIGITAL1,OUTPUT);
-		digitalWrite(DIGITAL1,HIGH);
-	}
-
-	// disable Smart Agr Xtr
-	if (WaspRegisterSensor & REG_XTR)
-	{
-		pinMode(DIGITAL3,OUTPUT);
-		digitalWrite(DIGITAL3,HIGH);
-	}
-
 
 	switch (SELECTION)
 	{
@@ -277,28 +249,6 @@ void WaspSPI::setSPISlave(uint8_t SELECTION)
 		case SOCKET1_SELECT:		Utils.setMuxSocket1();
 									digitalWrite(MUX_TX,LOW);
 									break;
-		case DUST_SENSOR_SELECT:	if (WaspRegisterSensor & REG_DUST_GASES_PRO)
-									{
-										digitalWrite(DUST_SENSOR_CS,LOW);
-									}
-									break;
-		case SMART_WATER_SELECT:	if (WaspRegisterSensor & REG_WATER)
-									{
-										digitalWrite(DIGITAL4,LOW);
-									}
-									break;
-
-		case SMART_IONS_SELECT:		if (WaspRegisterSensor & REG_WATER_IONS)
-									{
-										digitalWrite(DIGITAL1,LOW);
-									}
-									break;
-
-    case SMART_XTR_SELECT:		if (WaspRegisterSensor & REG_XTR)
-    							{
-  									digitalWrite(DIGITAL3, LOW);
-  								}
-  								break;
 
 		case ALL_DESELECTED:		// Do nothing more
 									break;
@@ -317,16 +267,6 @@ void WaspSPI::setSPISlave(uint8_t SELECTION)
  ******************************************************************************/
 void WaspSPI::secureBegin()
 {
-	// this codeblock belongs to the performance of the SD card
-	// check if Dust sensor was not powered on before using the SD card
-	if (WaspRegisterSensor & REG_DUST_GASES_PRO)
-	{
-		if ((WaspRegister & REG_3V3) && (SPI.isDustSensor == false))
-		{
-			digitalWrite(DUST_SENSOR_POWER,HIGH);
-		}
-	}
-
 	// this codeblock belongs to the performance of the SD card:
 	// -> check if Semtech module was not powered on before using the SD card
 	// -> check if RS485 module was not powered on before using the SD card
@@ -335,10 +275,6 @@ void WaspSPI::secureBegin()
 		if (SPI.isSocket0 == false)
 		{
 			PWR.powerSocket(SOCKET0,HIGH);
-			if (WaspRegister & REG_DUST_GASES_PRO)
-			{
-				delay(1);
-			}
 		}
 	}
 
@@ -361,16 +297,6 @@ void WaspSPI::secureBegin()
  ******************************************************************************/
 void WaspSPI::secureEnd()
 {
-	// this codeblock belongs to the performance of the SD card
-	// check if Dust sensor was not powered on before using the SD card
-	if (WaspRegister & REG_DUST_GASES_PRO)
-	{
-		if ((WaspRegister & REG_3V3) && (SPI.isDustSensor == false))
-		{
-			digitalWrite(DUST_SENSOR_POWER,LOW);
-		}
-	}
-
 	// this codeblock belongs to the performance of the SD card
 	// -> switch off the SX module if it was not powered on
 	// -> switch off the RS485 module if it was not powered on
