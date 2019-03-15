@@ -65,7 +65,7 @@
 /*! \def MAX_FRAME
     \brief maximum size in bytes of the frame
  */
-#define MAX_FRAME 340
+#define MAX_FRAME 255
 
 
 
