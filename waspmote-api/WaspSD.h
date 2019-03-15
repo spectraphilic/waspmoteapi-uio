@@ -66,7 +66,7 @@
 /*! \def BIN_BUFFER_SIZE
     \brief Buffer size for storing binary data
  */
-#define DOS_BUFFER_SIZE 256
+#define DOS_BUFFER_SIZE 341
 #define	BIN_BUFFER_SIZE	100
 
 
