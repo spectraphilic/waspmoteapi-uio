@@ -2160,7 +2160,7 @@ void WaspRTC::detachInt(void)
  *
  * 
  */
-void WaspRTC::setWatchdog(uint16_t minutesWatchdog)
+uint8_t WaspRTC::setWatchdog(uint16_t minutesWatchdog)
 {		
 	if (_boot_version < 'H')
 	{
@@ -2168,7 +2168,7 @@ void WaspRTC::setWatchdog(uint16_t minutesWatchdog)
 		PRINT_RTC(F("This example is valid only for Waspmote v15.\n"));
 		PRINT_RTC(F("Your Waspmote version is v12.\n"));
 		PRINT_RTC(F("*******************************************\n"));
-		return (void)0;
+		return 1;
 	}
 	
 	uint8_t days = 0;
@@ -2176,7 +2176,7 @@ void WaspRTC::setWatchdog(uint16_t minutesWatchdog)
 	uint8_t minutes = 0;
 	
 	// check correct input
-	if (minutesWatchdog == 0) return (void)1;
+	if (minutesWatchdog == 0) return 1;
 	
 	// If needed: Translate from 'minutes' to 'days, hours and minutes'
 	if (minutesWatchdog < 60)
@@ -2196,7 +2196,7 @@ void WaspRTC::setWatchdog(uint16_t minutesWatchdog)
 	}
 	else
 	{
-		return (void)1;
+		return 1;
 	}
 	
 	// get RTC status
@@ -2209,13 +2209,37 @@ void WaspRTC::setWatchdog(uint16_t minutesWatchdog)
 	}
 	
 	// Set Alarm2 for specified time
-	RTC.setAlarm2(days, hours, minutes, RTC_OFFSET, RTC_ALM2_MODE2);
+	uint8_t err = RTC.setAlarm2(days, hours, minutes, RTC_OFFSET, RTC_ALM2_MODE2);
+
+	if (err == 1)
+	{
+		PRINT_RTC(F("setWatchdog: setAlarm2 error"));
+	}
+	else
+	{
+		// get backup of selected Alarm
+		uint8_t day_aux = RTC.day_alarm2;
+		uint8_t hour_aux = RTC.hour_alarm2;
+		uint8_t minute_aux = RTC.minute_alarm2;
+		// get Alarm
+		RTC.getAlarm1();
+		// check Alarm was correctly set
+		if(	( day_aux != RTC.day_alarm2 )
+		||	( hour_aux != RTC.hour_alarm2 )
+		||	( minute_aux != RTC.minute_alarm2 ) )
+		{
+			err = 1;
+			PRINT_RTC(F("setWatchdog error"));
+		}
+	}
     
     // switch off RTC if needed
     if (!status)
 	{
 		RTC.OFF();
 	}
+
+	return err;
 }
   
 /*
