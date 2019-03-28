@@ -860,7 +860,7 @@ class WaspRTC
 		to perform before the reset is done
 	\return void
 	*/
-	void setWatchdog(uint16_t minutesWatchdog);
+	uint8_t setWatchdog(uint16_t minutesWatchdog);
 
 	/*! It gets the RTC alarm2 settings for generating a Waspmote reset
 	\return pointer to the buffer which stores the watchdog time settings
