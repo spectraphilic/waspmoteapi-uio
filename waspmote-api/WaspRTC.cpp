@@ -954,9 +954,15 @@ uint8_t WaspRTC::setTime(	uint8_t _year,
  * It returns a string containing time and data in the following format:
  * "YY:MM:DD:dw:hh:mm:ss"
  */
-char* WaspRTC::getTime()
+
+void WaspRTC::readTime()
 {
 	readRTC(RTC_DATE_ADDRESS_2);
+}
+
+char* WaspRTC::getTime()
+{
+	readTime();
 	return getTimestamp();
 }
 
@@ -1834,7 +1840,7 @@ void WaspRTC::disableAlarm2()
 unsigned long WaspRTC::getEpochTime()
 {
 	// get actual time and date
-	RTC.getTime();
+	RTC.readTime();
 	
 	return getEpochTime(RTC.year,
 						RTC.month,
