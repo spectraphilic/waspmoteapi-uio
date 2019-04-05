@@ -87,7 +87,7 @@ int main(void)
 		// get RTC time and last almarm setting
 		RTC.ON();
 		RTC.getAlarm1();
-		RTC.getTime();	
+		RTC.readTime();
 		
 		// when the interruption and startup has been produced within 3 seconds
 		// then we validate the Hibernate interruption. If not, maybe the 
