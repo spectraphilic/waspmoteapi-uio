@@ -652,6 +652,7 @@ class WaspRTC
 	\sa setTime(const char* time), setTime(uint8_t year, uint8_t month, uint8_t 
 	date, uint8_t day_week, uint8_t hour, uint8_t minute, uint8_t second)
 	 */
+	void readTime();
 	char* getTime();
 	
 	//! It sets Alarm1 to the specified time. It also enables the corresponding 
