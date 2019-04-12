@@ -1214,7 +1214,7 @@ uint8_t Wasp4G::ON()
 /* Function: 	This function powers off the LE910 module
  * Return:	 nothing
  */
-void Wasp4G::OFF()
+uint8_t Wasp4G::OFF()
 {
 	uint8_t status = 0;
 	uint8_t counter = 3;
@@ -1237,6 +1237,7 @@ void Wasp4G::OFF()
 	pinMode(GPRS_PW,OUTPUT);
 	digitalWrite(GPRS_PW, LOW);
 
+	return status;
 }
 
 /* Function: 	This function sets a PIN / PUK code
