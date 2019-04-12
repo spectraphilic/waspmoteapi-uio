@@ -411,7 +411,7 @@ public:
 	\brief	This function powers off the LE910 module
 	\return nothing
 	*/
-	void OFF();
+	uint8_t OFF();
 
 	/*!
 	\brief	This function enters a PIN / PUK code
