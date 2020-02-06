@@ -2909,7 +2909,7 @@ uint8_t WaspSX1272::setACK()
 		// Setting ACK
 		memset( &ACK, 0x00, sizeof(ACK) );
 		ACK.dst = packet_received.src; // ACK destination is packet source
-		ACK.src = packet_received.dst; // ACK source is packet destination
+		ACK.src = sx1272._nodeAddress;
 		ACK.packnum = packet_received.packnum; // packet number that has been correctly received
 		ACK.length = 0;		  // length = 0 to show that's an ACK
 		ACK.data[0] = _reception;	// CRC of the received packet
@@ -4719,7 +4719,7 @@ uint8_t WaspSX1272::getACK(uint32_t wait)
 		// Checking the received ACK
 		if( ACK.dst == packet_sent.src )
 		{
-			if( ACK.src == packet_sent.dst )
+			if( ACK.src == packet_sent.dst || packet_sent.dst == 0 )
 			{
 				if( ACK.packnum == packet_sent.packnum )
 				{
