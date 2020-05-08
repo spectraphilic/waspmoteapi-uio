@@ -594,7 +594,7 @@ char* WaspSD::print_disk_info()
         flag = CARD_NOT_PRESENT;
 		// aux <-- "no SD"
 		strcpy_P(aux,  (char*)pgm_read_word(&(table_SD[1])));
-        sprintf(buffer, aux);
+        strcpy(buffer, aux);
 		return buffer;
     }
 

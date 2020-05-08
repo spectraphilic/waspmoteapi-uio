@@ -7681,6 +7681,8 @@ uint8_t Wasp4G::read_DS2413()
 			return status & 0x01;
 		}
 	}
+
+	return 0;
 }
 
 

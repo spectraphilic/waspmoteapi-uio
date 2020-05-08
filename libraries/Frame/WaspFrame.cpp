@@ -897,7 +897,7 @@ uint8_t WaspFrame::encryptFrame( uint16_t keySize, char* password )
 	}
 
 	// Buffer for the encrypted message with enough memory space
-	uint8_t encrypted_message[encrypted_length];
+	uint8_t encrypted_message[frame._maxSize];
 
 	// create Encrypted message
 	AES.encrypt(  keySize

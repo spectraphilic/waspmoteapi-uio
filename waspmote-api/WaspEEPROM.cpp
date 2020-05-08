@@ -397,7 +397,7 @@ uint8_t WaspEEPROM::sleepCommand()
 	USB.println();*/
 	
 	memset(_buffer,0x00,sizeof(_buffer));
-	memcpy(_buffer,command,sizeof(_buffer));
+	memcpy(_buffer,command, length);
 	
 	_buffer[length] = crc[0];
 	_buffer[length+1] = crc[1];

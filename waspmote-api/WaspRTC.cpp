@@ -250,7 +250,7 @@ char* WaspRTC::getTimestamp()
 			break;
 	case 7:	snprintf(timeStamp, sizeof(timeStamp), buffer, DAY_7, year, month, date, hour, minute, second);
 			break;
-	default:snprintf(timeStamp, sizeof(timeStamp), error_string);
+	default:strcpy(timeStamp, error_string);
 			break;
   }
   return timeStamp;
@@ -1421,7 +1421,7 @@ char* WaspRTC::getAlarm1()
 		default:
 			// buffer: "Incorrect alarm mode"
 			strcpy_P(buffer,  (char*)pgm_read_word(&(table_RTC[7])));
-			snprintf(timeStamp, sizeof(timeStamp), buffer);
+			strcpy(timeStamp, buffer);
 	}
 
 	return timeStamp;
@@ -1770,7 +1770,7 @@ char* WaspRTC::getAlarm2()
 		default:
 			// buffer: "Incorrect alarm mode"
 			strcpy_P(buffer,  (char*)pgm_read_word(&(table_RTC[7])));
-			snprintf(timeStamp, sizeof(timeStamp), buffer);
+			strcpy(timeStamp, buffer);
 	}
 
 	return timeStamp;
