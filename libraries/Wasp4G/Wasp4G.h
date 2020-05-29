@@ -68,9 +68,6 @@
 #define LE910_OK 			"OK"
 
 
-static char LE910_OTA_FILE[] = "UPGRADE.TXT";
-
-
 // LE910 Baud Rate
 #define	LE910_RATE	115200
 

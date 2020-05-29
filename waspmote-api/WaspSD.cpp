@@ -2977,7 +2977,7 @@ void WaspSD::menu(uint32_t timeout)
 {
 	uint32_t previous;
 	char option;
-	int i = 0;
+	unsigned int i = 0;
 	char filename[20];
 
 	// init SD card

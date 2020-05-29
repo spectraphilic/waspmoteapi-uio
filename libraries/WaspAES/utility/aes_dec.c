@@ -53,7 +53,6 @@ void aes_dec_round(aes_cipher_state_t* state, const aes_roundkey_t* k)
 {
 	uint8_t tmp[16];
 	uint8_t i;
-	uint8_t t,u,v,w;
 	
 	
 	/// *** STEP 1: keyAdd ***

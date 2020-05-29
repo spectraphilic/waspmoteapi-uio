@@ -692,7 +692,6 @@ void WaspFrame::createFrameBin(uint8_t mode)
 {      
 	// local variables
 	uint8_t sequence;
-	char str[17];
 
 	// store mode: ASCII or BINARY
 	_mode = mode;
@@ -953,6 +952,10 @@ uint8_t WaspFrame::encryptFrame( uint16_t keySize, char* password )
 				{
 					frame_type = AES_LIBELIUM_CLOUD_SW_FRAME; // #102
 				}
+				else
+				{
+					return 0;
+				}
 				break;
 			default:
 				return 0;
@@ -1122,6 +1125,7 @@ uint8_t WaspFrame::encryptFrameHw(uint8_t keyIndex)
 
 	// create Encrypted message
 	error = eeprom.encrypt(keyIndex, frame.buffer, frame.length, encrypted_message, &encrypted_length);
+	if (error) return 0;
 
 	/// Create new frame with the correct structure
 	/***
@@ -1300,6 +1304,10 @@ uint8_t WaspFrame::encryptFragment(uint16_t keySize, char* password)
 				{
 					frame_type = AES_LIBELIUM_CLOUD_SW_FRAME; // #102
 				}
+				else
+				{
+					return 1;
+				}
 				break;
 			default:
 				return 1;
@@ -1467,6 +1475,7 @@ uint8_t WaspFrame::encryptFragmentHw(uint8_t keyIndex)
 
 	// create Encrypted message
 	error = eeprom.encrypt(keyIndex, frame.bufferFragment, frame.lengthFragment, encrypted_message, &encrypted_length);
+	if (error) return 0;
 
 	/// Create new frame with the correct structure
 	/***
@@ -3822,32 +3831,12 @@ int8_t WaspFrame::addSensor(uint8_t type, uint16_t val[])
 	else if (type == SENSOR_PM_BINH){
 			len = 8;
 	}
+	else {
+		len = 0; // XXX
+	}
 
 	if(_mode == ASCII)
 	{
-		// get name of sensor from table
-		char numDecimals;
-
-		if (_boot_version >= 'G')
-		{
-			if (_frameType == INFORMATION_FRAME_AGR_XTR)
-			{
-				numDecimals = (uint8_t)pgm_read_word(&(AGR_XTR_DECIMAL_TABLE[type]));
-			}
-			else if (_frameType == INFORMATION_FRAME_WTR_XTR)
-			{
-				numDecimals = (uint8_t)pgm_read_word(&(WTR_XTR_DECIMAL_TABLE[type]));
-			}
-			else
-			{
-				numDecimals = (uint8_t)pgm_read_word(&(FRAME_DECIMAL_TABLE[type]));
-			}
-		}
-		else
-		{
-			numDecimals = (uint8_t)pgm_read_word(&(DECIMAL_TABLE[type]));
-		}
-
 		char str[len][4];
 		// convert from uint16_t to string
 		for(int i=0; i<len; i++){
@@ -4511,7 +4500,7 @@ uint8_t WaspFrame::generateFragment()
 	lengthFragment = fragmentHeaderLength;
 
 	// clear the rest of the buffer
-	for (int i = lengthFragment; i < sizeof(bufferFragment); i++)
+	for (unsigned int i = lengthFragment; i < sizeof(bufferFragment); i++)
 	{
 		bufferFragment[i] = 0x00;
 	}

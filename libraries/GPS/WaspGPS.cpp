@@ -273,7 +273,7 @@ uint8_t WaspGPS::init(const char* _coordinateLat,
 															_resetCfg);
 	// sencoCommand() not used here.
 	setChecksum(_dataBuffer);
-	snprintf(_dataBuffer, sizeof(_dataBuffer), "%s\r\n", _dataBuffer);
+	strlcat(_dataBuffer, "\r\n", sizeof(_dataBuffer));
 	serialFlush(_uart);
 	printString(_dataBuffer,_uart);
 

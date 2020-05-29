@@ -1051,7 +1051,6 @@ void WaspPWR::powerSocket(uint8_t socket, uint8_t state)
  */
 void WaspPWR::checkPeripherals()
 {
-	uint8_t answer;
 	
 	// define object for UART0
 	WaspUART uart0 = WaspUART();

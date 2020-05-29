@@ -52,7 +52,7 @@ void aes_shiftcol(void* data, uint8_t shift){
 static
 void aes_enc_round(aes_cipher_state_t* state, const aes_roundkey_t* k)
 {
-	uint8_t tmp[16], t;
+	uint8_t tmp[16];
 	uint8_t i;	
 	
 	///  *** STEP 1: subBytes  *** 
@@ -215,7 +215,6 @@ void aes_encrypt_core(	aes_cipher_state_t* state,
 	#endif
 	
 	uint8_t i;
-	uint8_t k;
 	for(i=0; i<16; ++i)
 	{
 		state->s[i] ^= ks->key[0].ks[i];

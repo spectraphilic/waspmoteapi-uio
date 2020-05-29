@@ -667,7 +667,7 @@ bool SdBaseFile::open(SdBaseFile* dirFile, const char* path, uint8_t oflag)
 		{
 			if(!strcmp(path,".."))
 			{
-				strncpy((char*)dname,"..",2);	
+				strlcpy((char*)dname, "..", sizeof(dname));
 				break;						
 			}
 			else

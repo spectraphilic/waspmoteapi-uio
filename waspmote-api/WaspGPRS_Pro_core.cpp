@@ -481,9 +481,9 @@ WaspGPRS_Pro_core::WaspGPRS_Pro_core(){
 	memset(_apn, '\0', sizeof(_apn));
 	memset(_apn_login, '\0', sizeof(_apn_login));
 	memset(_apn_password, '\0', sizeof(_apn_password));
-	strncpy(_apn, AT_GPRS_APN, min(sizeof(_apn), strlen(AT_GPRS_APN)));
-	strncpy(_apn_login, AT_GPRS_LOGIN, min(sizeof(_apn_login), strlen(AT_GPRS_LOGIN)));
-	strncpy(_apn_password, AT_GPRS_PASSW, min(sizeof(_apn_password), strlen(AT_GPRS_PASSW)));
+	strlcpy(_apn, AT_GPRS_APN, sizeof(_apn));
+	strlcpy(_apn_login, AT_GPRS_LOGIN, sizeof(_apn_login));
+	strlcpy(_apn_password, AT_GPRS_PASSW, sizeof(_apn_password));
 
 }
 

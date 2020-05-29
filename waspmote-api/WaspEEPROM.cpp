@@ -252,7 +252,6 @@ uint8_t WaspEEPROM::sendCommand(uint8_t* command)
 	uint8_t crc_rx[2];
 	uint8_t crc_aux[2];
 	uint8_t length = command[0]-2;
-	uint8_t rx_length = 16;
 	uint16_t address = 0xFE00; // CMD REGISTER ADDRESS
 	
 	do
@@ -300,7 +299,7 @@ uint8_t WaspEEPROM::sendCommand(uint8_t* command)
 	
 	// Parse response
 	uint8_t count = _buffer[0];
-	uint8_t status = _buffer[1];
+	//uint8_t status = _buffer[1];
 	
 	#if DEBUG_EEPROM > 0
 		PRINT_EEPROM("[EEPROM] Response count: ");

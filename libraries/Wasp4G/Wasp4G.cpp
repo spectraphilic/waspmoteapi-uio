@@ -31,15 +31,18 @@
 
 
 
+static char LE910_OTA_FILE[] = "UPGRADE.TXT";
+
+
 //! class constructor
 Wasp4G::Wasp4G()
 {
 	memset(_apn, '\0', sizeof(_apn));
 	memset(_apn_login, '\0', sizeof(_apn_login));
 	memset(_apn_password, '\0', sizeof(_apn_password));
-	strncpy(_apn, LE910_GPRS_APN, min(sizeof(_apn), strlen(LE910_GPRS_APN)));
-	strncpy(_apn_login, LE910_GPRS_LOGIN, min(sizeof(_apn_login), strlen(LE910_GPRS_LOGIN)));
-	strncpy(_apn_password, LE910_GPRS_PASSW, min(sizeof(_apn_password), strlen(LE910_GPRS_PASSW)));
+	strlcpy(_apn, LE910_GPRS_APN, sizeof(_apn));
+	strlcpy(_apn_login, LE910_GPRS_LOGIN, sizeof(_apn_login));
+	strlcpy(_apn_password, LE910_GPRS_PASSW, sizeof(_apn_password));
 
 	// Set "application/x-www-form-urlencoded" as default Content-Type
 	sprintf_P(_contentType, (char*)pgm_read_word(&(table_HTTP[7])));
@@ -68,7 +71,6 @@ Wasp4G::Wasp4G()
 uint8_t Wasp4G::getErrorCode()
 {
 	uint8_t status;
-	char format[20];
 
 	// wait for " <err>\r\n"
 	status = waitFor((char*)"\r\n", 3000);
@@ -575,7 +577,6 @@ uint8_t Wasp4G::httpWaitResponse(uint32_t wait_timeout)
 uint8_t Wasp4G::ftpFileSize( char* ftp_file)
 {
 	uint8_t answer;
-	char *pointer;
 	char command_buffer[50];
 
 	// init variable
@@ -1388,7 +1389,6 @@ uint8_t Wasp4G::checkConnection(uint8_t time)
 {
 	uint8_t answer;
 	uint8_t status;
-	uint8_t value;
 	uint32_t previous;
 
 	char command_buffer[40];
@@ -2424,7 +2424,6 @@ uint8_t Wasp4G::http(	uint8_t method,
 						char* data)
 {
 	uint8_t answer;
-	int16_t http_data;
 
 	// 1. Check data connection
 	answer = checkDataConnection(60);
@@ -2496,7 +2495,6 @@ uint8_t Wasp4G::sendFrameToMeshlium(char* url,
 									uint16_t length)
 {
 	uint8_t answer;
-	int16_t http_data;
 
 	// 1. Check data connection
 	answer = checkDataConnection(60);
@@ -2724,7 +2722,6 @@ uint8_t Wasp4G::ftpGetWorkingDirectory()
 {
 	uint8_t answer;
 	char command_buffer[100];
-	char* pointer;
 
 	// AT#FTPPWD\r
 	memset(command_buffer, 0x00, sizeof(command_buffer));
@@ -2809,8 +2806,7 @@ uint8_t Wasp4G::ftpChangeWorkingDirectory(char* dirname)
 
 	// update attribute if OK
 	memset(_ftpWorkingDirectory, 0x00, sizeof(_ftpWorkingDirectory));
-	strncpy(_ftpWorkingDirectory, "/", 1);
-	strncat(_ftpWorkingDirectory, dirname, sizeof(_ftpWorkingDirectory)-2);
+	snprintf(_ftpWorkingDirectory, sizeof(_ftpWorkingDirectory), "/%s", dirname);
 
 	return 0;
 }
@@ -3078,8 +3074,6 @@ uint8_t Wasp4G::ftpDownload( char* sd_file, char* ftp_file)
 	int32_t packet_size = LE910_MAX_DL_PAYLOAD;
 	int nBytes = 0;
 	uint8_t error_counter = 5;
-	int data_available;
-	uint32_t prev;
 
 	// init error code variable
 	_errorCode = 0;
@@ -3512,7 +3506,6 @@ uint8_t Wasp4G::openSocketClient(uint8_t socketId,
 								uint16_t local_port,
 								uint8_t keep_alive)
 {
-	uint8_t error;
 	uint8_t answer;
 	char command_buffer[100];
 
@@ -3701,7 +3694,6 @@ uint8_t Wasp4G::openSocketServer(uint8_t socketId,
 								uint16_t local_port,
 								uint8_t keep_alive)
 {
-	uint8_t error;
 	uint8_t answer;
 	char command_buffer[100];
 
@@ -4315,7 +4307,7 @@ uint8_t Wasp4G::send(uint8_t socketId,
 	}
 
 	// send array of data
-	for (int i = 0; i < data_length; i++)
+	for (uint16_t i = 0; i < data_length; i++)
 	{
 		printByte(data[i], 1);
 	}
@@ -4446,7 +4438,7 @@ uint8_t Wasp4G::sendSSL(uint8_t socketId,
 	}
 
 	// send array of data
-	for (int i = 0; i < data_length; i++)
+	for (uint16_t i = 0; i < data_length; i++)
 	{
 		printByte(data[i], 1);
 	}
@@ -4525,7 +4517,6 @@ uint8_t Wasp4G::receive(uint8_t socketId)
 uint8_t Wasp4G::receive(uint8_t socketId, uint32_t timeout)
 {
 	uint8_t answer;
-	int incoming_bytes;
 	char command_buffer[25];
 	char command_answer[25];
 	uint32_t nBytes = 0;
@@ -4569,7 +4560,7 @@ uint8_t Wasp4G::receive(uint8_t socketId, uint32_t timeout)
 	}
 
 	// get number of pending bytes to be read in socket
-	incoming_bytes = socketInfo[socketId].size;
+	//int incoming_bytes = socketInfo[socketId].size;
 
 
 	//// 2. Send command to read received data and save it
@@ -5462,8 +5453,6 @@ uint8_t Wasp4G::gpsSendHttpRequest()
 {
 	uint8_t answer;
 	char command_buffer[40];
-	char answer1[20];
-	char answer2[20];
 	char* pch;
 
 	// get current wireless network settings
@@ -6658,7 +6647,7 @@ uint8_t Wasp4G::getWirelessNetwork()
  */
 uint8_t Wasp4G::setTimeFrom4G(bool utc)
 {
-	int8_t answer, networkType;
+	int8_t answer;
 	char format[60];
 	char command_buffer[50];
 	uint8_t year, month, day;
@@ -6857,7 +6846,6 @@ uint8_t Wasp4G::emailConfigureSMTP(uint8_t security, uint16_t port)
 {
 	uint8_t error;
 	char command_buffer[50];
-	char answer[20];
 
 	// AT#SMTPCFG=<ssl_encryption>,<port>\r
 	sprintf_P(command_buffer, (char*)pgm_read_word(&(table_EMAIL_LE910[7])),security,port);
@@ -6983,7 +6971,6 @@ uint8_t Wasp4G::emailSend(char* address,char* subject,char* body)
 {
 	uint8_t error;
 	char command_buffer[50];
-	char answer[20];
 
 	//// 1. Check data connection
 	error = checkDataConnection(60);
@@ -7563,7 +7550,6 @@ uint8_t Wasp4G::on_DS2413()
 		// Send reset pulse
 		write_DS2413(DS2413_RESET);
 
-		uint8_t state = 0;
 
 		uint32_t previous = millis();
 		while((millis() - previous < 1000) && status == 0)
@@ -7618,7 +7604,6 @@ uint8_t Wasp4G::off_DS2413()
 		// Send reset pulse
 		write_DS2413(DS2413_RESET);
 
-		uint8_t state = 0;
 
 		uint32_t previous = millis();
 		while((millis() - previous < 16000) && status == 1)
@@ -7651,7 +7636,6 @@ uint8_t Wasp4G::off_DS2413()
  */
 uint8_t Wasp4G::read_DS2413()
 {
-	bool ok = false;
 	uint8_t status;
 
 	oneWire.reset();
@@ -7664,7 +7648,7 @@ uint8_t Wasp4G::read_DS2413()
 	// Get register status
 	//////////////////////
 	// Compare nibbles
-	ok = (!status & 0x0F) == (status >> 4);
+	//bool ok = (! (status & 0x0F)) == (status >> 4);
 	// Clear inverted values
 	status &= 0x0F;
 
