@@ -29,6 +29,8 @@
 #include "WaspGPRS_Pro_core.h"
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-truncation"
 
 
 
@@ -7190,3 +7192,7 @@ int8_t WaspGPRS_Pro_core::requestOTA(const char* FTP_server, const char* FTP_por
 }
 
 #endif
+
+
+
+#pragma GCC diagnostic pop
