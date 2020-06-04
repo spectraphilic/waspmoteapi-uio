@@ -1148,7 +1148,9 @@ uint8_t WaspRTC::setAlarm1(const char* time, uint8_t offset, uint8_t mode)
 	}
 
 	alarm1Mode = mode;
-	RTC.writeRTCalarm1();
+	if (RTC.writeRTCalarm1()) {
+	  return 1;
+	}
 	RTC.configureAlarmMode(1,mode);
 	return 0;
 }
@@ -1298,7 +1300,9 @@ uint8_t WaspRTC::setAlarm1(uint8_t day_date,
 	}
 
 	alarm1Mode = mode;
-	RTC.writeRTCalarm1();
+	if (RTC.writeRTCalarm1()) {
+	  return 1;
+	}
 	RTC.configureAlarmMode(1,mode);
 
 	return 0;
@@ -1543,7 +1547,9 @@ uint8_t WaspRTC::setAlarm2(const char* time, uint8_t offset, uint8_t mode)
 	}
 
 	alarm2Mode = mode;
-	RTC.writeRTCalarm2();
+	if (RTC.writeRTCalarm2()) {
+	  return 1;
+	}
 	RTC.configureAlarmMode(2,mode);
 
 	return 0;
@@ -1672,7 +1678,9 @@ uint8_t WaspRTC::setAlarm2(uint8_t day_date,
 	}
 
 	alarm2Mode = mode;
-	RTC.writeRTCalarm2();
+	if (RTC.writeRTCalarm2()) {
+	  return 1;
+	}
 	RTC.configureAlarmMode(2,mode);
 
 	return 0;
