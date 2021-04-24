@@ -421,13 +421,14 @@ void WaspSD::OFF(void)
 	SPI.isSD = false;
 
 	// close current working directory if it is not the root directory
-	if(!currentDir.isRoot())
+	if(!currentDir.isRoot() && currentDir.isOpen())
 	{
 		currentDir.close();
 	}
 
 	// close root directory
-	root.close();
+	if (root.isOpen())
+		root.close();
 
 	// SD_SS (SD chip select) is disabled
   	pinMode(SD_SS, OUTPUT);
@@ -816,7 +817,8 @@ SdFile WaspSD::getParentDir(const char *filepath, int *index)
 		subdirname[idx] = 0;
 
 		// close the subdir (we reuse them) if open
-		subdir->close();
+		if (subdir->isOpen())
+			subdir->close();
 		if (! subdir->open(parent, subdirname, O_READ))
 		{
 			// failed to open one of the subdirectories

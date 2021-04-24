@@ -2290,7 +2290,7 @@ uint8_t WaspRTC::setWatchdog(uint16_t minutesWatchdog)
 		uint8_t hour_aux = RTC.hour_alarm2;
 		uint8_t minute_aux = RTC.minute_alarm2;
 		// get Alarm
-		RTC.getAlarm1();
+		RTC.getAlarm2();
 		// check Alarm was correctly set
 		if(	( day_aux != RTC.day_alarm2 )
 		||	( hour_aux != RTC.hour_alarm2 )
