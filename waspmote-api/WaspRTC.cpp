@@ -1679,7 +1679,10 @@ uint8_t WaspRTC::setAlarm2(uint8_t day_date,
 
 	alarm2Mode = mode;
 	if (RTC.writeRTCalarm2()) {
-	  return 1;
+		#if DEBUG_RTC > 0
+		PRINT_RTC(F("setAlarm2: write error"));
+		#endif
+		return 1;
 	}
 	RTC.configureAlarmMode(2,mode);
 
@@ -2278,28 +2281,6 @@ uint8_t WaspRTC::setWatchdog(uint16_t minutesWatchdog)
 
 	// Set Alarm2 for specified time
 	uint8_t err = RTC.setAlarm2(days, hours, minutes, RTC_OFFSET, RTC_ALM2_MODE2);
-
-	if (err == 1)
-	{
-		PRINT_RTC(F("setWatchdog: setAlarm2 error"));
-	}
-	else
-	{
-		// get backup of selected Alarm
-		uint8_t day_aux = RTC.day_alarm2;
-		uint8_t hour_aux = RTC.hour_alarm2;
-		uint8_t minute_aux = RTC.minute_alarm2;
-		// get Alarm
-		RTC.getAlarm2();
-		// check Alarm was correctly set
-		if(	( day_aux != RTC.day_alarm2 )
-		||	( hour_aux != RTC.hour_alarm2 )
-		||	( minute_aux != RTC.minute_alarm2 ) )
-		{
-			err = 1;
-			PRINT_RTC(F("setWatchdog error"));
-		}
-	}
 
     // switch off RTC if needed
     if (!status)
